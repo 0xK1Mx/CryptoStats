@@ -1,0 +1,124 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  margin: 0;
+}
+
+body {
+}
+
+html {
+  font-size: 62.5%;
+  font-family: "roboto";
+}
+
+.header {
+  height: 8rem;
+  border-bottom: 1px solid #00000027;
+}
+
+.hero {
+  height: 30vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn {
+  background-color: transparent;
+  border: 1px solid #51cf66;
+  width: 12rem;
+  height: 4rem;
+  border-radius: 15px;
+  cursor: pointer;
+  background-color: #51cf66;
+
+  font-weight: 600;
+  font-size: 1.4rem;
+  letter-spacing: 0.5px;
+}
+
+.btn > a {
+  text-decoration: none;
+  color: aliceblue;
+}
+
+.title {
+  font-size: 4.8rem;
+  margin-bottom: 2rem;
+}
+
+.wrapper {
+  max-width: 160rem;
+  margin: 0 auto;
+}
+
+.market {
+  margin: 0 auto;
+  width: 100%;
+  font-size: 1.4rem;
+  font-weight: 500;
+  border-top: 1px solid #00000027;
+}
+
+.market__row {
+  box-shadow: 0 1px 0 0 #00000027;
+  height: 6rem;
+}
+
+.market__cell > span {
+  display: flex;
+  margin-left: 2rem;
+}
+
+.market__cell--rank {
+  width: 5%;
+  text-align: center;
+  font-weight: 600;
+  color: gray;
+}
+
+.market__cell--crypto {
+  width: 25%;
+  font-weight: 600;
+}
+.market__cell--crypto > span {
+  display: flex;
+  margin-left: 2rem;
+}
+.market__cell--price {
+  width: 15%;
+  text-align: center;
+}
+.market__cell--marketCap {
+  width: 15%;
+  text-align: center;
+}
+.market__cell--volume {
+  width: 15%;
+  text-align: center;
+}
+.market__cell--supply {
+  width: 15%;
+  text-align: center;
+}
+.market__cell {
+  width: 10%;
+}
+
+.market__asset {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-left: 2rem;
+}
+
+.market__asset-name {
+  letter-spacing: 0.5px;
+}
+.market__asset-icon {
+  width: 2rem;
+}
