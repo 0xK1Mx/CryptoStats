@@ -37,6 +37,10 @@ userSchema.pre("save", async function (next) {
   this.passwordConfirm = undefined;
 });
 
+userSchema.methods.comparePassword = async function (plainTextPass, hashPass) {
+  return (await plainTextPass) === hashPass;
+};
+
 const User = new mongoose.model("User", userSchema);
 
 export default User;
