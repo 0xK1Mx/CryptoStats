@@ -14,11 +14,6 @@ html {
   font-family: "roboto";
 }
 
-.header {
-  height: 8rem;
-  border-bottom: 1px solid #00000027;
-}
-
 .hero {
   height: 60vh;
   display: flex;

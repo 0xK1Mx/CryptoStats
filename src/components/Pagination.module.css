@@ -1,0 +1,29 @@
+.pagination {
+  display: flex;
+  gap: 4rem;
+  justify-content: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  align-items: center;
+}
+
+.paginationBtn {
+  width: 3rem;
+  height: 3rem;
+  background-color: #51cf66;
+  border: none;
+  border-radius: 5px;
+  color: rgb(255, 255, 255);
+  font-weight: bolder;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.paginationBtn:disabled {
+  background-color: hsla(130, 57%, 56%, 0.5);
+  cursor: default;
+}
+
+.pagination > span {
+  font-weight: 800;
+}

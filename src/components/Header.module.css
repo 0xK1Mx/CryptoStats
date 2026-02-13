@@ -1,0 +1,44 @@
+.header {
+  height: 8rem;
+  border-bottom: 1px solid #00000027;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+
+.auth {
+  display: flex;
+  gap: 2rem;
+}
+
+.btnSignUp {
+  background-color: transparent;
+  color: rgb(0, 0, 0);
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #51cf66;
+  height: 3rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.4rem;
+  letter-spacing: 0.5px;
+}
+
+.btnLogIn {
+  border: 1px solid #51cf66;
+  width: 8rem;
+  height: 3rem;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #51cf66;
+  font-weight: 600;
+  font-size: 1.4rem;
+  letter-spacing: 0.5px;
+}
+
+.btnLogIn a {
+  color: white;
+  text-decoration: none;
+}
