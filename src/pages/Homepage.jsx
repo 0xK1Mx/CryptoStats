@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import heroImage from "./../assets/hero.png";
+import heroImage2 from "./../assets/hero2.png";
 
 function Homepage() {
   const [data, setData] = useState([]);
@@ -79,13 +81,17 @@ function Homepage() {
   });
   return (
     <>
-      {/* <header className="header">
+      <header className="header">
         <div>
-          <button className="btn">Sign up</button>
-          <button className="btn">Log in</button>
+          {/* <button className="btn">Sign up</button>
+          <button className="btn">Log in</button> */}
         </div>
-      </header> */}
+      </header>
       <div className="hero">
+        <div className="heroContainer">
+          <img src={heroImage} className="hero__img" />
+          <img src={heroImage2} className="hero__img2" />
+        </div>
         <h1 className="title">Track your favorites crypto now!</h1>
         <div className="cta">
           <button className="btn">
@@ -95,6 +101,9 @@ function Homepage() {
       </div>
       <div className="wrapper">
         <main>
+          <div className="control">
+            <input placeholder="search..." type="text" className="searchBar" />
+          </div>
           <table className="market">
             <thead className="market__head">
               <tr className="market__row">

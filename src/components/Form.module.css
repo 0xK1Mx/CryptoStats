@@ -41,8 +41,8 @@
   border: none;
   height: 4rem;
   background-color: #51cf66;
-  font-weight: 600;
+  font-weight: 800;
   letter-spacing: 0.5px;
-
+  color: aliceblue;
   cursor: pointer;
 }

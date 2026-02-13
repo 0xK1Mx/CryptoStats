@@ -32,9 +32,8 @@ app.route("/api/v1/markets").get(async (req, res) => {
 });
 
 // Create User
-app.route("/api/v1/users").post(async (req, res) => {
+app.route("/api/v1/users/signup").post(async (req, res, next) => {
   try {
-    console.log(req.body);
     const newUser = await User.create({
       email: req.body.email,
       password: req.body.password,
@@ -48,9 +47,10 @@ app.route("/api/v1/users").post(async (req, res) => {
       },
     });
   } catch (error) {
+    console.log(error);
     res.status(401).json({
-      status: " fail",
-      error: error,
+      status: "fail",
+      message: error.message,
     });
   }
 });
