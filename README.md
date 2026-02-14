@@ -33,10 +33,7 @@ More features will be added as development continues.
 - Express
 - MongoDB
 - Mongoose
-- JWT
-- bcrypt
-- dotenv
-
+- 
 ---
 
 ## 🔐 Authentication
