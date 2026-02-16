@@ -11,6 +11,7 @@ import express from "express";
 
 import usersRouter from "./routes/usersRouter.js";
 import marketRouter from "./routes/market/marketRouter.js";
+import { errorController } from "./controllers/errorController.js";
 
 const app = express();
 
@@ -21,5 +22,7 @@ app.use(cors({ origin: ["http://localhost:5173", "http://127.0.0.1:5173"] }));
 app.use("/api/v1/markets", marketRouter);
 //handle users routes
 app.use("/api/v1/users", usersRouter);
+
+app.use(errorController);
 
 export default app;

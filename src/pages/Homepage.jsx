@@ -10,22 +10,22 @@ function Homepage() {
   const [page, setPage] = useState(1);
   const tableRef = useRef(null);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const res = await fetch(
-  //         `http://127.0.0.1:8000/api/v1/markets?page=${page}`,
-  //       );
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(
+          `http://127.0.0.1:8000/api/v1/markets?page=${page}`,
+        );
 
-  //       const results = await res.json();
+        const results = await res.json();
 
-  //       setData(results.data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   fetchData();
-  // }, [page]);
+        setData(results.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [page]);
 
   useEffect(() => {
     tableRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -101,7 +101,7 @@ function Homepage() {
         <h1 className="title">Track your favorites crypto now!</h1>
         <div className="cta">
           <button className="btn">
-            <Link to="/login">Get started</Link>
+            <Link to="/signup">Get started</Link>
           </button>
         </div>
       </div>

@@ -1,0 +1,6 @@
+export const errorController = async (err, req, res, next) => {
+  if (err.name === "JsonWebTokenError") {
+    throw new Error("The token belonging to that user dont exist", 401);
+  }
+  next();
+};

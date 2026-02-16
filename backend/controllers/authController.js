@@ -9,12 +9,13 @@ export const signUp = async (req, res, next) => {
       password: req.body.password,
       passwordConfirm: req.body.passwordConfirm,
     });
-    console.log(process.env.JWT_SECRET);
 
     //Generate JWT
     const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRES,
     });
+
+    newUser.password = undefined;
 
     res.status(201).json({
       status: "success",
@@ -69,5 +70,44 @@ export const longIn = async (req, res, next) => {
       status: "fail",
       error,
     });
+  }
+};
+
+// Implement protected routes
+export const protect = async (req, res, next) => {
+  try {
+    // Check if user have token
+    let token;
+    if (
+      req.headers.autorization &&
+      req.headers.autorization.startsWith("bearer")
+    ) {
+      token = req.headers.autorization.split(" ")[1];
+    }
+
+    if (!token) {
+      throw new Error("User is not login");
+    }
+
+    // JWT verification
+    const verificationofJWT = jwt.verify(token, process.env.JWT_SECRET);
+
+    //Find that user
+    const currentUser = await User.findById(verificationofJWT.id);
+
+    if (!currentUser) {
+      throw new Error("The user that belong to the token no longer exist", 401);
+    }
+
+    //Check if the password was changed after the jwt was issued
+    if (currentUser.checkPasswordLastModifytime(verificationofJWT.iat)) {
+      throw error("Password Changed recently", 401);
+    }
+
+    req.user = currentUser;
+    next();
+  } catch (error) {
+    console.log(error);
+    next();
   }
 };

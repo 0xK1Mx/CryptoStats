@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function Header() {
   return (
     <header className={styles.header}>
-      <span>LOGO</span>
+      <span></span>
       <div className={styles.auth}>
         <button className={styles.btnSignUp}>Sign up</button>
         <button className={styles.btnLogIn}>

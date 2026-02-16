@@ -28,7 +28,20 @@ const userSchema = new mongoose.Schema({
     },
     select: false,
   },
+  passwordModifiedTime: {
+    type: Date,
+  },
 });
+
+userSchema.methods.checkPasswordLastModifytime = async function (iat) {
+  if (this.passwordModifiedTime) {
+    const changeTime = parseInt(this.passwordModifiedTime.getTime() / 1000, 10);
+    // if Change time > iat mean password was changed
+    return changeTime > iat;
+  }
+
+  return false;
+};
 
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
