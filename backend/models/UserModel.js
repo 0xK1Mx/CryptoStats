@@ -59,11 +59,10 @@ userSchema.methods.createResetToken = async function () {
   return token;
 };
 
-userSchema.pre("save", function (next) {
-  if (!this.isModified("password") || this.isNew) return next();
+userSchema.pre("save", async function () {
+  if (!this.isModified("password") || this.isNew) return;
 
   this.passwordModifiedTime = Date.now() - 1000;
-  next();
 });
 
 userSchema.pre("save", async function () {
@@ -74,7 +73,7 @@ userSchema.pre("save", async function () {
 });
 
 userSchema.methods.comparePassword = async function (plainTextPass, hashPass) {
-  return await bcrypt.compare(plainTextPass, hashPass);
+  return bcrypt.compare(plainTextPass, hashPass);
 };
 
 const User = new mongoose.model("User", userSchema);
