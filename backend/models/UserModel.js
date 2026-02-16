@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import validator from "validator";
 import bcrypt from "bcrypt";
+import crypto from "crypto";
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -28,9 +29,9 @@ const userSchema = new mongoose.Schema({
     },
     select: false,
   },
-  passwordModifiedTime: {
-    type: Date,
-  },
+  passwordModifiedTime: Date,
+  passwordResetToken: String,
+  passwordResetTokenExpiration: Date,
 });
 
 userSchema.methods.checkPasswordLastModifytime = async function (iat) {
@@ -43,15 +44,37 @@ userSchema.methods.checkPasswordLastModifytime = async function (iat) {
   return false;
 };
 
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
+userSchema.methods.createResetToken = async function () {
+  //Generate that token
+  const token = crypto.randomBytes(32).toString("hex");
+
+  //Hash that password
+  this.passwordResetToken = crypto
+    .createHash("sha256")
+    .update(token)
+    .digest("hex");
+
+  this.passwordResetTokenExpiration = Date.now() + 10 * 60 * 1000;
+
+  return token;
+};
+
+userSchema.pre("save", function (next) {
+  if (!this.isModified("password") || this.isNew) return next();
+
+  this.passwordModifiedTime = Date.now() - 1000;
+  next();
+});
+
+userSchema.pre("save", async function () {
+  if (!this.isModified("password")) return;
   this.password = await bcrypt.hash(this.password, 12);
 
   this.passwordConfirm = undefined;
 });
 
 userSchema.methods.comparePassword = async function (plainTextPass, hashPass) {
-  return (await plainTextPass) === hashPass;
+  return await bcrypt.compare(plainTextPass, hashPass);
 };
 
 const User = new mongoose.model("User", userSchema);
