@@ -22,9 +22,10 @@ function generateJWT(user, statusCode, res) {
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
     ),
     httpOnly: true,
+    sameSite: "lax",
   };
 
-  if (process.env.NODE.ENV === "production") cookiesOptions.secure = true;
+  if (process.env.NODE_ENV === "production") cookiesOptions.secure = true;
 
   res.cookie("jwt", token, cookiesOptions);
 
@@ -32,7 +33,6 @@ function generateJWT(user, statusCode, res) {
 
   res.status(statusCode).json({
     status: "success",
-    token,
   });
 }
 
@@ -70,34 +70,25 @@ export const longIn = catchAsync(async (req, res, next) => {
 
 // Implement protected routes
 export const protect = catchAsync(async (req, res, next) => {
-  // Check if user have token
-  let token;
-  if (
-    req.headers.autorization &&
-    req.headers.autorization.startsWith("Bearer")
-  ) {
-    token = req.headers.authorization.split(" ")[1];
-  }
+  const token = req.cookies?.jwt;
 
   if (!token) {
-    return next(new AppError("You are not login", 401));
+    return next(new AppError("You are not logged in", 401));
   }
 
-  // JWT verification
-  const verificationofJWT = jwt.verify(token, process.env.JWT_SECRET);
+  let decoded;
+  try {
+    decoded = jwt.verify(token, process.env.JWT_SECRET);
+  } catch (err) {
+    return next(new AppError("Invalid or expired token", 401));
+  }
 
-  //Find that user
-  const currentUser = await User.findById(verificationofJWT.id);
+  const currentUser = await User.findById(decoded.id);
 
   if (!currentUser) {
     return next(
       new AppError("The user belonging to that token doesn't exist.", 401),
     );
-  }
-
-  //Check if the password was changed after the jwt was issued
-  if (currentUser.checkPasswordLastModifytime(verificationofJWT.iat)) {
-    new AppError("Password Changed recently.", 401);
   }
 
   req.user = currentUser;
@@ -221,5 +212,12 @@ export const updateUserInfo = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: "succees",
     user: updatedUser,
+  });
+});
+
+export const getuser = catchAsync(async (req, res, next) => {
+  res.status(200).json({
+    status: "sucess",
+    user: req.user,
   });
 });

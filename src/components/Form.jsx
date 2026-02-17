@@ -1,38 +1,41 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./Form.module.css";
 
 import Header from "./Header";
 
 function Form() {
+  const navigate = useNavigate();
+
+  const [isLogin, setIsLogin] = React.useState(false);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
 
-  console.log(email, password, confirmPassword);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const url = isLogin
+      ? "http://localhost:8000/api/v1/users/login"
+      : "http://localhost:8000/api/v1/users/signup";
+
+    const body = isLogin
+      ? { email, password }
+      : { email, password, passwordConfirm: confirmPassword };
+
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/v1/users/signup", {
+      const res = await fetch(url, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-          passwordConfirm: confirmPassword,
-        }),
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(body),
       });
 
-      const data = await res.json();
-
-      //   throw new Error(`Please`)
-
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
-      console.log(data);
+      if (res.ok) {
+        navigate("/UserDashboard");
+      } else {
+        console.log("Authentication failed");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -41,46 +44,54 @@ function Form() {
   return (
     <>
       <Header />
+
       <form className={styles.signupForm} onSubmit={handleSubmit}>
+        <h2>{isLogin ? "Login" : "Create Account"}</h2>
+
         <div className={styles.signupForm__group}>
-          <label className="signup-form__label">Enter email</label>
           <input
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-            className="signup-form__input"
-            name="email"
-            placeholder="Johndoe@example.com"
             type="email"
+            placeholder="Johndoe@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
 
         <div className={styles.signupForm__group}>
-          <label className="signup-form__label">Enter password</label>
           <input
+            type="password"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="signup-form__input"
-            name="password"
-            type="password"
-            placeholder="*******"
-            required
-          />
-        </div>
-        <div className={styles.signupForm__group}>
-          <label className="signup-form__label">Confirm password</label>
-          <input
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            className="signup-form__input"
-            name="confirmPassword"
-            type="password"
-            placeholder="*******"
             required
           />
         </div>
 
-        <button class={styles.signupForm__button}>Create account</button>
+        {!isLogin && (
+          <div className={styles.signupForm__group}>
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+          </div>
+        )}
+
+        <button className={styles.signupForm__button}>
+          {isLogin ? "Login" : "Sign Up"}
+        </button>
+
+        <p
+          style={{ cursor: "pointer", marginTop: "1rem" }}
+          onClick={() => setIsLogin(!isLogin)}
+        >
+          {isLogin
+            ? "Don't have an account? Sign up"
+            : "Already have an account? Login"}
+        </p>
       </form>
     </>
   );

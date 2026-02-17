@@ -6,11 +6,12 @@ import {
   forgotPassword,
   resetPassword,
   signUp,
+  getuser,
 } from "./../controllers/authController.js";
 
 const router = express.Router();
 
-router.get("/dashboard", protect);
+router.get("/me", protect, getuser);
 router.post("/signup", signUp);
 router.post("/login", longIn);
 

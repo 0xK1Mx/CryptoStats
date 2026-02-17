@@ -5,8 +5,8 @@ import cors from "cors";
 import helmet from "helmet";
 import { rateLimit } from "express-rate-limit";
 import mongoSanitize from "express-mongo-sanitize";
-import xss from "xss";
 import hpp from "hpp";
+import cookieParser from "cookie-parser";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -32,10 +32,10 @@ app.use("/api", limiter);
 
 app.use(express.json({ limit: "10kb" }));
 
+app.use(cookieParser());
+
 // Data cleaning against noSQL query injection
-app.use(mongoSanitize());
 //XXS
-app.use(xss());
 
 // Preventing parameter pollution
 app.use(
@@ -44,7 +44,12 @@ app.use(
   }),
 );
 
-app.use(cors({ origin: ["http://localhost:5173", "http://127.0.0.1:5173"] }));
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "http://127.0.0.1:5173"],
+    credentials: true,
+  }),
+);
 
 app.use("/api/v1/markets", marketRouter);
 //handle users routes
