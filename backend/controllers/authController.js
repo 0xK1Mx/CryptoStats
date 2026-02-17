@@ -7,6 +7,35 @@ import catchAsync from "../utils/catchAsync.js";
 import AppError from "../utils/AppError.js";
 import sendEmail from "../utils/sendMails.js";
 
+const signToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRES,
+  });
+};
+
+function generateJWT(user, statusCode, res) {
+  //Generate JWT
+  const token = signToken(user._id);
+
+  const cookiesOptions = {
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
+    ),
+    httpOnly: true,
+  };
+
+  if (process.env.NODE.ENV === "production") cookiesOptions.secure = true;
+
+  res.cookie("jwt", token, cookiesOptions);
+
+  user.password = undefined;
+
+  res.status(statusCode).json({
+    status: "success",
+    token,
+  });
+}
+
 export const signUp = catchAsync(async (req, res, next) => {
   const newUser = await User.create({
     email: req.body.email,
@@ -14,20 +43,7 @@ export const signUp = catchAsync(async (req, res, next) => {
     passwordConfirm: req.body.passwordConfirm,
   });
 
-  //Generate JWT
-  const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES,
-  });
-
-  newUser.password = undefined;
-
-  res.status(201).json({
-    status: "success",
-    token,
-    data: {
-      newUser,
-    },
-  });
+  generateJWT(newUser, 201, res);
 });
 
 export const longIn = catchAsync(async (req, res, next) => {
@@ -49,15 +65,7 @@ export const longIn = catchAsync(async (req, res, next) => {
     return next(new AppError("Password or email is not correct.", 401));
   }
 
-  //Generate JWT
-  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES,
-  });
-
-  res.status(200).json({
-    status: "success",
-    token,
-  });
+  generateJWT(user, 200, res);
 });
 
 // Implement protected routes
@@ -159,16 +167,7 @@ export const resetPassword = catchAsync(async (req, res, next) => {
   await user.save({ validateBeforeSave: false });
 
   //change the password last modified date in model
-
-  //Generate JWT
-  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES,
-  });
-
-  res.json({
-    status: "success",
-    token,
-  });
+  generateJWT(user, 200, res);
 });
 
 //Implement update password
@@ -192,5 +191,35 @@ export const updatePassword = catchAsync(async (req, res, next) => {
   res.json({
     status: "success",
     message: "success modified password",
+  });
+});
+
+export const updateUserInfo = catchAsync(async (req, res, next) => {
+  // Check if user tried to update password
+  if (req.body.password || req.body.passwordConfirm) {
+    return next(new AppError("You cannot update your password here", 401));
+  }
+
+  //filtering out bad request fields
+
+  function filterObj(obj, ...params) {
+    const newObj = {};
+    Object.keys(obj).forEach((el) => {
+      if (params.includes(el)) newObj[el] = obj[el];
+    });
+
+    return newObj;
+  }
+  const reqObj = filterObj(req.body, "name", "email");
+
+  // find user and update
+  const updatedUser = await User.findByIdAndUpdate(req.user.id, reqObj, {
+    new: true,
+    runValidators: true,
+  });
+
+  res.status(200).json({
+    status: "succees",
+    user: updatedUser,
   });
 });
