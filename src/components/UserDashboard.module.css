@@ -1,0 +1,34 @@
+.userInfos {
+  height: 25vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  border-bottom: 1px solid rgb(0, 0, 0);
+  padding-bottom: 3rem;
+  margin-bottom: 5rem;
+}
+
+.userInfos span {
+  font-size: 1.6rem;
+}
+
+.userInfos h3 {
+  font-size: 3.6rem;
+}
+.watchlist {
+  display: flex;
+  gap: 1rem;
+}
+.crypto {
+  width: 10rem;
+  height: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.coin {
+  width: 5rem;
+}

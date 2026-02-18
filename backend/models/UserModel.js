@@ -29,6 +29,7 @@ const userSchema = new mongoose.Schema({
     },
     select: false,
   },
+  watchList: Array,
   passwordModifiedTime: Date,
   passwordResetToken: String,
   passwordResetTokenExpiration: Date,

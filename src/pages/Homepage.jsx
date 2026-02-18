@@ -55,6 +55,15 @@ function Homepage() {
     return number;
   }
 
+  const handleAddFavoris = function (crypto) {
+    fetch("http://localhost:8000/api/v1/users/watchlist", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify(crypto),
+    });
+  };
+
   const listCrypto = data.map((crypto) => {
     return (
       <tr className="market__row">
@@ -85,7 +94,9 @@ function Homepage() {
           <span> {formatter.format(crypto.total_supply)}</span>
         </td>
         <td>
-          <button className="btn">+ add</button>
+          <button onClick={() => handleAddFavoris(crypto)} className="btn">
+            + add
+          </button>
         </td>
       </tr>
     );
