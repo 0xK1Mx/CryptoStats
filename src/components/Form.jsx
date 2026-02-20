@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Form.module.css";
 
@@ -11,6 +11,7 @@ function Form() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,13 +32,14 @@ function Form() {
         body: JSON.stringify(body),
       });
 
+      const data = await res.json();
       if (res.ok) {
         navigate("/UserDashboard");
       } else {
-        console.log("Authentication failed");
+        throw new Error(data.message);
       }
     } catch (error) {
-      console.log(error);
+      setError(error.message);
     }
   };
 
@@ -80,6 +82,9 @@ function Form() {
           </div>
         )}
 
+        {isLogin
+          ? error && <ErrorMsg>{error}</ErrorMsg>
+          : error && <ErrorMsg>{error}</ErrorMsg>}
         <button className={styles.signupForm__button}>
           {isLogin ? "Login" : "Sign Up"}
         </button>
@@ -95,6 +100,10 @@ function Form() {
       </form>
     </>
   );
+}
+
+function ErrorMsg({ children }) {
+  return <div className={styles.errorMsg}>{children}</div>;
 }
 
 export default Form;

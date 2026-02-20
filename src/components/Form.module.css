@@ -46,3 +46,8 @@
   color: aliceblue;
   cursor: pointer;
 }
+
+.errorMsg {
+  color: #fa5252;
+  font-weight: 600;
+}
