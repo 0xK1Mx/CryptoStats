@@ -7,9 +7,11 @@ function Header() {
     <header className={styles.header}>
       <span></span>
       <div className={styles.auth}>
-        <button className={styles.btnSignUp}>Sign up</button>
-        <button className={styles.btnLogIn}>
-          <Link to="/login">Log in</Link>
+        <button className={styles.btn}>
+          <Link to="/signup">sign up</Link>
+        </button>
+        <button className={styles.btn}>
+          <Link to="/signup">Log in</Link>
         </button>
       </div>
     </header>

@@ -1,7 +1,7 @@
 import AppError from "./../utils/AppError.js";
 
 function handleValidationError() {
-  return new AppError("The password or email does not match", 401);
+  return new AppError("Your password Confirm does not match", 401);
 }
 
 function handleDuplicationError() {
@@ -12,11 +12,11 @@ export const errorController = async (err, req, res, next) => {
   //   if (err.name === "JsonWebTokenError") {
   //     throw new Error("The token belonging to that user dont exist", 401);
   //   }
-
-  if (err.name === "ValidationError") err = handleValidationError();
-  if (err.cause.code === 11000) err = handleDuplicationError();
   err.statusCode = err.statusCode || 500;
   err.status = err.status || "error";
+  console.log(err);
+  if (err.name === "ValidationError") err = handleValidationError();
+  else if (err.code === 11000) err = handleDuplicationError();
 
   res.status(err.statusCode).json({
     status: err.status,

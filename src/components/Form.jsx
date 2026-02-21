@@ -14,6 +14,7 @@ function Form() {
   const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
+    setError("");
     e.preventDefault();
 
     const url = isLogin
@@ -40,6 +41,11 @@ function Form() {
       }
     } catch (error) {
       setError(error.message);
+      console.log(error);
+    } finally {
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
     }
   };
 
@@ -91,7 +97,10 @@ function Form() {
 
         <p
           style={{ cursor: "pointer", marginTop: "1rem" }}
-          onClick={() => setIsLogin(!isLogin)}
+          onClick={() => {
+            setError("");
+            return setIsLogin(!isLogin);
+          }}
         >
           {isLogin
             ? "Don't have an account? Sign up"

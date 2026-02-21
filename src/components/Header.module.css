@@ -26,7 +26,7 @@
   letter-spacing: 0.5px;
 }
 
-.btnLogIn {
+.btn {
   border: 1px solid #51cf66;
   width: 8rem;
   height: 3rem;
@@ -38,7 +38,7 @@
   letter-spacing: 0.5px;
 }
 
-.btnLogIn a {
+.btn a {
   color: white;
   text-decoration: none;
 }
