@@ -22,6 +22,11 @@ html {
   justify-content: center;
   position: relative;
 }
+.userIcon {
+  width: 2.5rem;
+  fill: #51cf66;
+  cursor: pointer;
+}
 
 .heroContainer {
   display: flex;

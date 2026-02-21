@@ -4,8 +4,9 @@ import heroImage from "./../assets/hero.png";
 import heroImage2 from "./../assets/hero2.png";
 import Pagination from "../components/Pagination";
 import Header from "../components/Header";
+import Star from "./../components/Star";
 
-function Homepage() {
+function Homepage({ isAuth }) {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const tableRef = useRef(null);
@@ -64,7 +65,7 @@ function Homepage() {
     });
   };
 
-  const listCrypto = data.map((crypto) => {
+  const listCrypto = data.map((crypto, i) => {
     return (
       <tr className="market__row">
         <td className="market__cell market__cell--rank ">
@@ -94,16 +95,16 @@ function Homepage() {
           <span> {formatter.format(crypto.total_supply)}</span>
         </td>
         <td>
-          <button onClick={() => handleAddFavoris(crypto)} className="btn">
-            + add
-          </button>
+          <span>
+            <Star />
+          </span>
         </td>
       </tr>
     );
   });
   return (
     <>
-      <Header />
+      <Header isAuth={isAuth} />
       <div className="hero">
         <div className="heroContainer">
           <img src={heroImage} className="hero__img" />
@@ -111,9 +112,11 @@ function Homepage() {
         </div>
         <h1 className="title">Track your favorites crypto now!</h1>
         <div className="cta">
-          <button className="btn">
-            <Link to="/signup">Get started</Link>
-          </button>
+          {!isAuth && (
+            <button className="btn">
+              <Link to="/signup">Get started</Link>
+            </button>
+          )}
         </div>
       </div>
       <div className="wrapper">
