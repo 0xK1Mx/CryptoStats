@@ -54,9 +54,12 @@ function Form() {
       <Header />
 
       <form className={styles.signupForm} onSubmit={handleSubmit}>
-        <h2>{isLogin ? "Login" : "Create Account"}</h2>
+        <h2 className={styles.formTitle}>
+          {isLogin ? "Login" : "Create your account account"}
+        </h2>
 
         <div className={styles.signupForm__group}>
+          <label>Email</label>
           <input
             type="email"
             placeholder="Johndoe@example.com"
@@ -67,6 +70,7 @@ function Form() {
         </div>
 
         <div className={styles.signupForm__group}>
+          <label>Password</label>
           <input
             type="password"
             placeholder="Password"
@@ -78,6 +82,8 @@ function Form() {
 
         {!isLogin && (
           <div className={styles.signupForm__group}>
+            <label>Confirm your password</label>
+
             <input
               type="password"
               placeholder="Confirm Password"
@@ -95,17 +101,30 @@ function Form() {
           {isLogin ? "Login" : "Sign Up"}
         </button>
 
-        <p
-          style={{ cursor: "pointer", marginTop: "1rem" }}
+        <div
+          className={styles.authToggle}
           onClick={() => {
             setError("");
             return setIsLogin(!isLogin);
           }}
         >
-          {isLogin
-            ? "Don't have an account? Sign up"
-            : "Already have an account? Login"}
-        </p>
+          {isLogin ? (
+            <p>
+              Don't have an account?
+              <em
+                style={{
+                  color: "#51cf66",
+                  fontStyle: "normal",
+                }}
+              >
+                {" "}
+                Sign up
+              </em>
+            </p>
+          ) : (
+            <p>Already have an account</p>
+          )}
+        </div>
       </form>
     </>
   );

@@ -1,15 +1,26 @@
 .signupForm {
-  width: 35rem;
-  margin: 15rem auto;
+  min-width: 32rem;
+  max-width: 50rem;
+  min-height: 55rem;
+  margin: 10rem auto;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+
   font-weight: 600;
   font-size: 1.2rem;
   letter-spacing: 0.5px;
-  padding: 2rem;
-  border-radius: 5px;
+  padding: 4rem;
+  border-radius: 15px;
   box-shadow: 0 6px 12px rgba(2, 6, 23, 0.06);
+  border: 1px solid rgba(214, 214, 214, 0.534);
+}
+
+.formTitle {
+  font-weight: 800;
+  font-size: 2.4rem;
+  margin-bottom: 2rem;
+  color: #495057;
 }
 
 .signupForm__group {
@@ -18,33 +29,53 @@
 }
 
 .signupForm__group > label {
-  font-size: 1.4rem;
   margin-bottom: 1rem;
+  font-size: 2rem;
+  color: #495057;
 }
 
 .signupForm__group > input {
+  font-size: 1.6rem;
+  font-weight: 600;
   outline: none;
-
-  height: 4rem;
+  height: 6rem;
   padding: 1rem;
+  color: #495057;
   border-radius: 5px;
   border: 1px solid rgba(139, 139, 139, 0.534);
+}
+
+.signupForm__group > input::placeholder {
+  color: #ced4da;
+  letter-spacing: 1px;
 }
 
 .signupForm__group > input:focus {
   border-color: #51cf66;
 }
 
+.signupForm__group > input[type="password"] {
+  font: xx-large;
+  letter-spacing: 5px;
+}
+
 .signupForm__button {
   margin-top: 2rem;
   border-radius: 5px;
   border: none;
-  height: 4rem;
+  height: 6rem;
   background-color: #51cf66;
   font-weight: 800;
   letter-spacing: 0.5px;
   color: aliceblue;
   cursor: pointer;
+}
+
+.authToggle {
+  cursor: pointer;
+  margin-top: 1rem;
+  font-size: 1.6rem;
+  color: #495057;
 }
 
 .errorMsg {
