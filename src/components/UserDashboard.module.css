@@ -1,19 +1,101 @@
-.userInfos {
+.overview {
   height: 25vh;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.overview span {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #495057;
+}
+
+.overview h3 {
+  font-size: 5.6rem;
+  color: #495057;
+}
+
+.btn__add__transaction {
+  height: 4rem;
+  width: 15rem;
+  margin-top: 1.5rem;
+  background-color: hsla(130, 57%, 56%, 0.5);
+  border: none;
+  font-weight: 800;
+  color: white;
+  border-radius: 5px;
+}
+
+.btn__add__transaction:hover {
+  cursor: pointer;
+  background-color: hsl(130, 57%, 56%);
+  transition: all 0.3s ease;
+}
+
+.assets__container {
+}
+.asset__list {
+  display: flex;
   flex-direction: column;
-  justify-content: end;
-  padding-bottom: 3rem;
-  margin-bottom: 5rem;
+  gap: 1.5rem;
+  padding: 0;
+}
+.asset {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  color: #495057;
+  height: 10rem;
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(2, 6, 23, 0.06);
+  border: 1px solid rgba(233, 233, 233, 0.534);
+  transition: all 0.3s ease;
 }
 
-.userInfos span {
-  font-size: 1.6rem;
+.asset:hover {
+  background-color: #f8f9fa;
+  cursor: pointer;
 }
 
-.userInfos h3 {
-  font-size: 3.6rem;
+.asset__info {
+  display: flex;
+  gap: 1rem;
+  /* background-color: rebeccapurple; */
 }
+
+.asset__img {
+  width: 6rem;
+  height: 6rem;
+}
+
+.asset__name {
+  font-size: 2.8rem;
+  font-weight: 800;
+}
+
+.asset__price {
+  font-size: 2rem;
+}
+
+.asset__holding {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.asset__value {
+  font-size: 2.8rem;
+  font-weight: 800;
+}
+
+.asset__amount {
+  font-size: 2rem;
+}
+
 .watchlist {
   display: flex;
   gap: 1rem;

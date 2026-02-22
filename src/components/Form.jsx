@@ -100,7 +100,6 @@ function Form() {
         <button className={styles.signupForm__button}>
           {isLogin ? "Login" : "Sign Up"}
         </button>
-
         <div
           className={styles.authToggle}
           onClick={() => {

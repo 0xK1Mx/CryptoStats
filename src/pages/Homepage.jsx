@@ -112,11 +112,9 @@ function Homepage({ isAuth }) {
         </div>
         <h1 className="title">Track your favorites crypto now!</h1>
         <div className="cta">
-          {!isAuth && (
-            <button className="btn">
-              <Link to="/signup">Get started</Link>
-            </button>
-          )}
+          <button className="btn">
+            <Link to="/signup">Get started</Link>
+          </button>
         </div>
       </div>
       <div className="wrapper">

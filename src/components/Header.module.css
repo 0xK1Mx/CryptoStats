@@ -1,5 +1,5 @@
 .header {
-  height: 8rem;
+  height: 10rem;
   border-bottom: 1px solid #00000027;
   display: flex;
   align-items: center;
@@ -26,10 +26,10 @@
   letter-spacing: 0.5px;
 }
 
-.btn {
+:global(.btn) {
   border: 1px solid #51cf66;
-  width: 8rem;
-  height: 3rem;
+  width: 12rem;
+  height: 5rem;
   border-radius: 5px;
   cursor: pointer;
   background-color: #51cf66;

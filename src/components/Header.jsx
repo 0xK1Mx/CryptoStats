@@ -8,9 +8,11 @@ function Header({ isAuth }) {
       <span></span>
       <div className={styles.auth}>
         {!isAuth && (
-          <button className="btn">
-            <Link to="/signup">Get started</Link>
-          </button>
+          <>
+            <button className="btn">
+              <Link to="/signup">Get started</Link>
+            </button>
+          </>
         )}
         {isAuth && (
           <span role="button" className="userIcon">
