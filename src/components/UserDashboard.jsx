@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import styles from "./userDashboard.module.css";
 
 function UserDashboard() {
@@ -53,114 +54,110 @@ function UserDashboard() {
   });
 
   return (
-    <div className="wrapper">
-      {/* <div className={styles.sidebar}></div> */}
-      <div className={styles.overview}>
-        <div>
-          <span>Balance</span>
-          <h3>548,45$</h3>
-        </div>
-        <button className={styles.btn__add__transaction}>
-          Add transaction
-        </button>
-      </div>
-      <div className={styles.assets__container}>
-        <ul className={styles.asset__list}>
-          <li className={styles.asset}>
-            <div className={styles.asset__info}>
-              <img
-                className={styles.asset__img}
-                src="https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400"
-              />
-              <div className={styles.asset__metrics}>
-                <div className={styles.asset__name}>Bitcoin</div>
-                <div className={styles.asset__price}>97,023$</div>
-              </div>
-            </div>
-            <div className={styles.asset__holding}>
-              <div className={styles.asset__value}>153,723$</div>
-              <div className={styles.asset__amount}>1.5 BTC</div>
-            </div>
+    <div className={styles.dashboard}>
+      <div className={styles.sidebar}>
+        <ul className={styles.sidebar__list}>
+          <li role="button" className={styles.sidebar__item}>
+            <i class="las la-stream"></i>
+            <span>Home</span>
           </li>
-          <li className={styles.asset}>
-            <div className={styles.asset__info}>
-              <img
-                className={styles.asset__img}
-                src="https://coin-images.coingecko.com/coins/images/279/large/ethereum.png"
-                alt="Ethereum"
-              />
-              <div className={styles.asset__metrics}>
-                <div className={styles.asset__name}>Ethereum</div>
-                <div className={styles.asset__price}>5,420$</div>
-              </div>
-            </div>
-            <div className={styles.asset__holding}>
-              <div className={styles.asset__value}>27,100$</div>
-              <div className={styles.asset__amount}>5 ETH</div>
-            </div>
+          <li role="button" className={styles.sidebar__item}>
+            <i class="las la-stream"></i>
+            <span>Market</span>
           </li>
-          <li className={styles.asset}>
-            <div className={styles.asset__info}>
-              <img
-                className={styles.asset__img}
-                src="https://coin-images.coingecko.com/coins/images/4128/large/solana.png"
-                alt="Solana"
-              />
-              <div className={styles.asset__metrics}>
-                <div className={styles.asset__name}>Solana</div>
-                <div className={styles.asset__price}>210$</div>
-              </div>
-            </div>
-            <div className={styles.asset__holding}>
-              <div className={styles.asset__value}>4,200$</div>
-              <div className={styles.asset__amount}>20 SOL</div>
-            </div>
+          <li role="button" className={styles.sidebar__item}>
+            <i class="las la-exchange-alt"></i>
+            <span>Exchange</span>
           </li>
-          <li className={styles.asset}>
-            <div className={styles.asset__info}>
-              <img
-                className={styles.asset__img}
-                src="https://coin-images.coingecko.com/coins/images/825/large/binance-coin-logo.png"
-                alt="BNB"
-              />
-              <div className={styles.asset__metrics}>
-                <div className={styles.asset__name}>BNB</div>
-                <div className={styles.asset__price}>680$</div>
-              </div>
-            </div>
-            <div className={styles.asset__holding}>
-              <div className={styles.asset__value}>13,600$</div>
-              <div className={styles.asset__amount}>20 BNB</div>
-            </div>
+          <li role="button" className={styles.sidebar__item}>
+            <i class="las la-sign-out-alt"></i>
+            <span>Log out</span>
           </li>
         </ul>
       </div>
-      {/* <div className={styles.watchlist}>
-        <table className="market">
-          <thead className="market__head">
-            <tr className="market__row">
-              <th className="market__cell market__cell--rank">#</th>
-              <th className="market__cell market__cell--crypto">
-                <span>Name</span>
-              </th>
-              <th className="market__cell market__cell--price">
-                <span>Price</span>
-              </th>
-              <th className="market__cell market__cell--marketCap">
-                <span>Market Cap</span>
-              </th>
-              <th className=" market__cell market__cell--volume">
-                <span>Volume</span>
-              </th>
-              <th className="market__cell market__cell--supply">
-                <span>Circulating supply</span>
-              </th>
-              <th className=" market__cell market__cell"></th>
-            </tr>
-          </thead>
-          <tbody className="market__body">{listCrypto}</tbody>
-        </table>
-      </div> */}
+
+      <div className={styles.user}>
+        <div className={styles.overview}>
+          <div>
+            <span>Balance</span>
+            <h3>548,45$</h3>
+          </div>
+          <button className={styles.btn__add__transaction}>
+            Add transaction
+          </button>
+        </div>
+        <div className={styles.assets__container}>
+          <ul className={styles.asset__list}>
+            <li className={styles.asset}>
+              <div className={styles.asset__info}>
+                <img
+                  className={styles.asset__img}
+                  src="https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400"
+                />
+                <div className={styles.asset__metrics}>
+                  <div className={styles.asset__name}>Bitcoin</div>
+                  <div className={styles.asset__price}>97,023$</div>
+                </div>
+              </div>
+              <div className={styles.asset__holding}>
+                <div className={styles.asset__value}>153,723$</div>
+                <div className={styles.asset__amount}>1.5 BTC</div>
+              </div>
+            </li>
+            <li className={styles.asset}>
+              <div className={styles.asset__info}>
+                <img
+                  className={styles.asset__img}
+                  src="https://coin-images.coingecko.com/coins/images/279/large/ethereum.png"
+                  alt="Ethereum"
+                />
+                <div className={styles.asset__metrics}>
+                  <div className={styles.asset__name}>Ethereum</div>
+                  <div className={styles.asset__price}>5,420$</div>
+                </div>
+              </div>
+              <div className={styles.asset__holding}>
+                <div className={styles.asset__value}>27,100$</div>
+                <div className={styles.asset__amount}>5 ETH</div>
+              </div>
+            </li>
+            <li className={styles.asset}>
+              <div className={styles.asset__info}>
+                <img
+                  className={styles.asset__img}
+                  src="https://coin-images.coingecko.com/coins/images/4128/large/solana.png"
+                  alt="Solana"
+                />
+                <div className={styles.asset__metrics}>
+                  <div className={styles.asset__name}>Solana</div>
+                  <div className={styles.asset__price}>210$</div>
+                </div>
+              </div>
+              <div className={styles.asset__holding}>
+                <div className={styles.asset__value}>4,200$</div>
+                <div className={styles.asset__amount}>20 SOL</div>
+              </div>
+            </li>
+            <li className={styles.asset}>
+              <div className={styles.asset__info}>
+                <img
+                  className={styles.asset__img}
+                  src="https://coin-images.coingecko.com/coins/images/825/large/binance-coin-logo.png"
+                  alt="BNB"
+                />
+                <div className={styles.asset__metrics}>
+                  <div className={styles.asset__name}>BNB</div>
+                  <div className={styles.asset__price}>680$</div>
+                </div>
+              </div>
+              <div className={styles.asset__holding}>
+                <div className={styles.asset__value}>13,600$</div>
+                <div className={styles.asset__amount}>20 BNB</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }
