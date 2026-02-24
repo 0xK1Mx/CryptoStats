@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import Sidebar from "./Sidebar";
 
 import styles from "./userDashboard.module.css";
+import { Link } from "react-router-dom";
 
 function UserDashboard() {
   const [user, setUser] = useState({ watchList: [] });
@@ -55,32 +57,14 @@ function UserDashboard() {
 
   return (
     <div className={styles.dashboard}>
-      <div className={styles.sidebar}>
-        <ul className={styles.sidebar__list}>
-          <li role="button" className={styles.sidebar__item}>
-            <i class="las la-stream"></i>
-            <span>Home</span>
-          </li>
-          <li role="button" className={styles.sidebar__item}>
-            <i class="las la-stream"></i>
-            <span>Market</span>
-          </li>
-          <li role="button" className={styles.sidebar__item}>
-            <i class="las la-exchange-alt"></i>
-            <span>Exchange</span>
-          </li>
-          <li role="button" className={styles.sidebar__item}>
-            <i class="las la-sign-out-alt"></i>
-            <span>Log out</span>
-          </li>
-        </ul>
-      </div>
+      <Sidebar />
 
       <div className={styles.user}>
         <div className={styles.overview}>
           <div>
-            <span>Balance</span>
-            <h3>548,45$</h3>
+            {/* <span>Balance</span> */}
+            <h3>Kim Ly</h3>
+            {/* <button>Add fund</button> */}
           </div>
           <button className={styles.btn__add__transaction}>
             Add transaction

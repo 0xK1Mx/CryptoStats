@@ -4,7 +4,8 @@ import React, { useState, useEffect } from "react";
 import "./style.css";
 import Signup from "./pages/Signup";
 import Homepage from "./Pages/Homepage";
-import UserDashboard from "./components/UserDashboard";
+import Market from "./components/Market";
+import UserDashboard from "./components/userDashboard";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -25,13 +26,15 @@ export default function App() {
 
   console.log(user);
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Homepage isAuth={isAuth} />} />
-
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/UserDashboard" element={<UserDashboard />}></Route>
-      </Routes>
-    </BrowserRouter>
+    <div className="wrapper">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Homepage isAuth={isAuth} />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/UserDashboard" element={<UserDashboard />}></Route>
+          <Route path="/market" element={<Market />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
