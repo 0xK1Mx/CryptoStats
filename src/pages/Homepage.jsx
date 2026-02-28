@@ -6,6 +6,8 @@ import Pagination from "../components/Pagination";
 import Header from "../components/Header";
 import Star from "./../components/Star";
 import Market from "../components/Market";
+import Trendings from "../components/Trendings";
+import MarketOverview from "../components/MarketOverview";
 
 function Homepage({ isAuth }) {
   const [data, setData] = useState([]);
@@ -64,47 +66,10 @@ function Homepage({ isAuth }) {
     });
   };
 
-  const listCrypto = data.map((crypto, i) => {
-    return (
-      <tr className="market__row">
-        <td className="market__cell market__cell--rank ">
-          {crypto.market_cap_rank}
-        </td>
-        <td className="market__cell market__cell--crypto">
-          <div className="market__cell market__asset">
-            <img
-              className="market__cell market__asset-icon"
-              src={crypto.image}
-            />
-            <span className="market__cell market__asset-name">
-              {crypto.name}
-            </span>
-          </div>
-        </td>
-        <td className="market__cell market__cell--price">
-          <span>{formatter.format(crypto.current_price)} $</span>
-        </td>
-        <td className="market__cell market__cell--marketCap">
-          <span>{formatCompactNumber(crypto.market_cap)} $</span>
-        </td>
-        <td className="market__cell market__cell--volume">
-          <span>${formatCompactNumber(crypto.total_volume)} </span>
-        </td>
-        <td className="market__cell market__cell--supply">
-          <span> {formatter.format(crypto.total_supply)}</span>
-        </td>
-        <td>
-          <span>
-            <Star />
-          </span>
-        </td>
-      </tr>
-    );
-  });
   return (
     <>
       <Header isAuth={isAuth} />
-      <div className="hero">
+      {/* <div className="hero">
         <div className="heroContainer">
           <img src={heroImage} className="hero__img" />
           <img src={heroImage2} className="hero__img2" />
@@ -115,12 +80,13 @@ function Homepage({ isAuth }) {
             <Link to="/signup">Get started</Link>
           </button>
         </div>
-      </div>
+      </div> */}
+      <MarketOverview />
       <div className="wrapper">
         <main>
-          <div className="control" ref={tableRef}>
+          {/* <div className="control" ref={tableRef}>
             <input placeholder="search..." type="text" className="searchBar" />
-          </div>
+          </div> */}
           <Market />
           <Pagination page={page} setPage={setPage} />
         </main>

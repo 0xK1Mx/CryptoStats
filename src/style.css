@@ -78,8 +78,12 @@ html {
   text-align: center;
 }
 .wrapper {
-  max-width: 160rem;
-  margin: 0 auto;
+  max-width: 130rem;
+  margin: 5rem auto;
+}
+
+.wrapper main {
+  padding: 0;
 }
 
 .control {

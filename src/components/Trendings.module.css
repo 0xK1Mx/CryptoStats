@@ -1,0 +1,65 @@
+.trendings {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 5rem;
+}
+
+.trendings h2 {
+  font-size: 1.6rem;
+  color: #888;
+}
+
+.container {
+  height: 25rem;
+  width: 1fr;
+  border-radius: 10px;
+  border: 1px solid #dee2e6;
+  overflow: hidden;
+}
+
+.container__list {
+  height: 100%;
+  padding: 0;
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  gap: 0.75rem;
+  list-style: none;
+  width: 100%;
+}
+
+.container__item {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  align-items: center;
+  padding-left: 2rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.container__item:hover {
+  background-color: #dee2e6;
+}
+
+.asset {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.asset__name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.asset__icon {
+  width: 3rem;
+  height: 3rem;
+}
+
+.price {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
