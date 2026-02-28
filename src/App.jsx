@@ -6,6 +6,7 @@ import Signup from "./pages/Signup";
 import Homepage from "./Pages/Homepage";
 import Market from "./components/Market";
 import UserDashboard from "./components/userDashboard";
+import Dashboard from "./components/Dashboard";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -31,7 +32,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Homepage isAuth={isAuth} />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/UserDashboard" element={<UserDashboard />}></Route>
+          <Route path="/dashboard" element={<Dashboard />}></Route>
           <Route path="/market" element={<Market />}></Route>
         </Routes>
       </BrowserRouter>

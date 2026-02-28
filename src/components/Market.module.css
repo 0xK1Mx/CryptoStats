@@ -11,7 +11,7 @@ main {
 
 .row {
   display: grid;
-  grid-template-columns: 5% 25% 15% 15% 15% 15% 5%;
+  grid-template-columns: 5% 20% 15% 5% 15% 15% 15% 5%;
   align-items: center;
   padding: 1.6rem 1rem;
   background: white;
@@ -55,6 +55,7 @@ main {
 .price,
 .marketCap,
 .volume,
+.dailyChange,
 .supply {
   text-align: center;
 }
@@ -76,4 +77,12 @@ main {
   display: flex;
   display: grid;
   grid-template-columns: 0.15fr 0.85fr;
+}
+
+/* State */
+.positive {
+  color: #51cf66;
+}
+.negative {
+  color: #ff6b6b;
 }

@@ -7,7 +7,7 @@ function Sidebar() {
     <div className={styles.sidebar}>
       <ul className={styles.sidebar__list}>
         <li role="button" className={styles.sidebar__item}>
-          <Link to={"/"}>
+          <Link to={"/userDashboard"}>
             <i class="las la-home"></i>
             <span>Home</span>
           </Link>

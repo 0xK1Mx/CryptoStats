@@ -35,7 +35,7 @@ function Form() {
 
       const data = await res.json();
       if (res.ok) {
-        navigate("/UserDashboard");
+        navigate("/dashboard");
       } else {
         throw new Error(data.message);
       }

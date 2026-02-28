@@ -1,5 +1,5 @@
 export const getMarketInfo = async (req, res) => {
-  const perPage = req.body?.perPage || 25;
+  const perPage = req.query?.per_page || 25;
   const page = req.query?.page || 1;
 
   try {

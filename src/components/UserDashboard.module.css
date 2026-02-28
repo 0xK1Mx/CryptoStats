@@ -6,9 +6,10 @@
 
 .user {
   padding-top: 10rem;
-  width: 85%;
-  margin-right: 10rem;
-  margin-left: 10rem;
+  display: flex;
+  flex-direction: column;
+  /* margin-right: 10rem;
+  margin-left: 10rem; */
 }
 
 .overview {
@@ -59,7 +60,7 @@
   display: flex;
   justify-content: space-between;
   color: #495057;
-  height: 10rem;
+  height: 8rem;
   display: flex;
   align-items: center;
   padding: 2rem;
@@ -77,21 +78,22 @@
 .asset__info {
   display: flex;
   gap: 1rem;
+  align-items: center;
   /* background-color: rebeccapurple; */
 }
 
 .asset__img {
-  width: 6rem;
-  height: 6rem;
+  width: 4rem;
+  height: 4rem;
 }
 
 .asset__name {
-  font-size: 2.8rem;
+  font-size: 2rem;
   font-weight: 800;
 }
 
 .asset__price {
-  font-size: 2rem;
+  font-size: 1.6rem;
 }
 
 .asset__holding {
@@ -101,28 +103,15 @@
 }
 
 .asset__value {
-  font-size: 2.8rem;
+  font-size: 2rem;
   font-weight: 800;
 }
 
 .asset__amount {
-  font-size: 2rem;
+  font-size: 1.6rem;
 }
 
 .watchlist {
   display: flex;
   gap: 1rem;
-}
-.crypto {
-  width: 10rem;
-  height: 10rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 5px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-.coin {
-  width: 5rem;
 }

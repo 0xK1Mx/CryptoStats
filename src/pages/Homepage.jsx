@@ -5,28 +5,27 @@ import heroImage2 from "./../assets/hero2.png";
 import Pagination from "../components/Pagination";
 import Header from "../components/Header";
 import Star from "./../components/Star";
+import Market from "../components/Market";
 
 function Homepage({ isAuth }) {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const tableRef = useRef(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch(
-          `http://127.0.0.1:8000/api/v1/markets?page=${page}`,
-        );
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const res = await fetch(`http://localhost:5000/market`);
 
-        const results = await res.json();
+  //       const results = await res.json();
 
-        setData(results.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, [page]);
+  //       setData(results);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   fetchData();
+  // }, [page]);
 
   useEffect(() => {
     tableRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -122,30 +121,7 @@ function Homepage({ isAuth }) {
           <div className="control" ref={tableRef}>
             <input placeholder="search..." type="text" className="searchBar" />
           </div>
-          <table className="market">
-            <thead className="market__head">
-              <tr className="market__row">
-                <th className="market__cell market__cell--rank">#</th>
-                <th className="market__cell market__cell--crypto">
-                  <span>Name</span>
-                </th>
-                <th className="market__cell market__cell--price">
-                  <span>Price</span>
-                </th>
-                <th className="market__cell market__cell--marketCap">
-                  <span>Market Cap</span>
-                </th>
-                <th className=" market__cell market__cell--volume">
-                  <span>Volume</span>
-                </th>
-                <th className="market__cell market__cell--supply">
-                  <span>Circulating supply</span>
-                </th>
-                <th className=" market__cell market__cell"></th>
-              </tr>
-            </thead>
-            <tbody className="market__body">{listCrypto}</tbody>
-          </table>
+          <Market />
           <Pagination page={page} setPage={setPage} />
         </main>
       </div>

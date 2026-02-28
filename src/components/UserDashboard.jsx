@@ -57,8 +57,6 @@ function UserDashboard() {
 
   return (
     <div className={styles.dashboard}>
-      <Sidebar />
-
       <div className={styles.user}>
         <div className={styles.overview}>
           <div>

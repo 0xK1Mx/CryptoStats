@@ -16,16 +16,15 @@ function Market() {
     style: "decimal",
     minimumFractionDigits: 2,
     maximumFractionDigits: 6,
-    // currency: "USD",
+    currency: "USD",
   });
 
   useEffect(function () {
     async function fetchData() {
-      const res = await fetch("http://127.0.0.1:8000/api/v1/markets?page=1");
+      const res = await fetch("http://localhost:5000/market");
 
-      const { data } = await res.json();
-
-      setData(data);
+      const { market } = await res.json();
+      setData(market);
     }
 
     fetchData();
@@ -36,7 +35,7 @@ function Market() {
   const cryptoList = data.map((el) => {
     return (
       <div className={styles.row}>
-        <div className={styles.rank}>{el.row}</div>
+        <div className={styles.rank}>{el.market_cap_rank}</div>
 
         <div className={styles.crypto}>
           <div className={styles.asset}>
@@ -45,10 +44,21 @@ function Market() {
           </div>
         </div>
 
-        <div className={styles.price}>1.00 $</div>
-        <div className={styles.marketCap}>74.7 B $</div>
-        <div className={styles.volume}>$12.9 B</div>
-        <div className={styles.supply}>74,709,655,538.2755</div>
+        <div className={styles.price}>
+          {formatter.format(el.current_price)} $
+        </div>
+        <div
+          className={`${styles.dailyChange} ${el.price_change_percentage_24h > 0 ? styles.positive : styles.negative}`}
+        >
+          <span>{el.price_change_percentage_24h.toFixed(2)}</span>
+        </div>
+        <div className={styles.marketCap}>
+          {formatter.format(el.market_cap)} $
+        </div>
+        <div className={styles.volume}>{formatter.format(el.total_volume)}</div>
+        <div className={styles.supply}>
+          {formatter.format(el.circulating_supply)}
+        </div>
         <div></div>
       </div>
     );
@@ -79,27 +89,21 @@ function Market() {
   };
 
   return (
-    <div className={styles.container}>
-      <Sidebar />
-      <main>
-        <div className={styles.market}>
-          {/* HEADER */}
-          <div className={`${styles.row} ${styles.header}`}>
-            <div className={styles.rank}>#</div>
-            <div className={styles.crypto}>Name</div>
-            <div className={styles.price}>Price</div>
-            <div className={styles.marketCap}>Market Cap</div>
-            <div className={styles.volume}>Volume</div>
-            <div className={styles.supply}>Circulating supply</div>
-            <div></div>
-          </div>
+    <div className={styles.market}>
+      {/* HEADER */}
+      <div className={`${styles.row} ${styles.header}`}>
+        <div className={styles.rank}>#</div>
+        <div className={styles.crypto}>Name</div>
+        <div className={styles.price}>Price</div>
+        <div className={styles.price}>24H%</div>
+        <div className={styles.marketCap}>Market Cap</div>
+        <div className={styles.volume}>Volume</div>
+        <div className={styles.supply}>Circulating supply</div>
+        <div></div>
+      </div>
 
-          {/* ROW */}
-          {cryptoList}
-        </div>
-
-        <Pagination page={page} setPage={setPage} />
-      </main>
+      {/* ROW */}
+      {cryptoList}
     </div>
   );
 }
