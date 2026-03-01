@@ -33,6 +33,7 @@ function generateJWT(user, statusCode, res) {
 
   res.status(statusCode).json({
     status: "success",
+    data: user,
   });
 }
 
@@ -66,6 +67,12 @@ export const longIn = catchAsync(async (req, res, next) => {
   }
 
   generateJWT(user, 200, res);
+});
+
+export const logOut = catchAsync(async (req, res, next) => {
+  //Remove the cookies
+  res.clearCookie("jwt");
+  console.log("cookie cleraer");
 });
 
 // Implement protected routes

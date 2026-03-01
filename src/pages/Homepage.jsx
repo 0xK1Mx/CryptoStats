@@ -9,7 +9,7 @@ import Market from "../components/Market";
 import Trendings from "../components/Trendings";
 import MarketOverview from "../components/MarketOverview";
 
-function Homepage({ isAuth }) {
+function Homepage({ isAuth, handleLogOut }) {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const tableRef = useRef(null);
@@ -68,8 +68,6 @@ function Homepage({ isAuth }) {
 
   return (
     <>
-      <Header isAuth={isAuth} />
-
       <div className="wrapper">
         <main>
           <MarketOverview />

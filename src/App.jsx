@@ -8,35 +8,29 @@ import Market from "./components/Market";
 import UserDashboard from "./components/userDashboard";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Header from "./components/Header";
 
 export default function App() {
   const [user, setUser] = useState(null);
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const res = await fetch("http://localhost:8000/api/v1/users/me", {
-          credentials: "include",
-        });
-        const { user: data } = await res.json();
-        setUser(data);
-      } catch (error) {}
-    }
-    fetchData();
-  }, []);
+  async function handleLogOut() {
+    const res = await fetch("http://localhost:8000/api/v1/users/logout");
+    const data = await res.json();
+    setUser(null);
+  }
 
   const isAuth = !!user;
 
-  console.log(user);
   return (
     <BrowserRouter>
+      <Header isAuth={isAuth} handleLogOut={handleLogOut} />
       <Routes>
-        <Route path="/" element={<Homepage isAuth={isAuth} />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/" element={<Homepage />} />
+        <Route path="/signup" element={<Signup setUser={setUser} />} />
         <Route
           path="/portfolio"
           element={
             <ProtectedRoute isAuth={isAuth}>
-              <Dashboard />
+              <Dashboard isAuth={isAuth} handleLogOut={handleLogOut} />
             </ProtectedRoute>
           }
         ></Route>

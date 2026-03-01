@@ -4,7 +4,7 @@ import styles from "./Form.module.css";
 
 import Header from "./Header";
 
-function Form() {
+function Form({ setUser }) {
   const navigate = useNavigate();
 
   const [isLogin, setIsLogin] = React.useState(false);
@@ -33,7 +33,10 @@ function Form() {
         body: JSON.stringify(body),
       });
 
-      const data = await res.json();
+      const { data } = await res.json();
+      setUser(data);
+
+      console.log(data);
       if (res.ok) {
         navigate("/portfolio");
       } else {
@@ -51,8 +54,6 @@ function Form() {
 
   return (
     <>
-      <Header />
-
       <form className={styles.signupForm} onSubmit={handleSubmit}>
         <h2 className={styles.formTitle}>
           {isLogin ? "Login" : "Create your account account"}

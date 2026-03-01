@@ -7,6 +7,7 @@ import {
   resetPassword,
   signUp,
   getuser,
+  logOut,
 } from "./../controllers/authController.js";
 import User from "../models/UserModel.js";
 
@@ -31,6 +32,7 @@ router.post("/watchlist", protect, async function (req, res, next) {
 router.get("/me", protect, getuser);
 router.post("/signup", signUp);
 router.post("/login", longIn);
+router.get("/logout", protect, logOut);
 
 router.post("/forgotpwd", forgotPassword);
 router.patch("/resetPwd/:token", resetPassword);

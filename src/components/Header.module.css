@@ -71,3 +71,14 @@
   font-size: 1.2rem;
   text-decoration: none;
 }
+
+.logoutIcon {
+  font-size: 2.8rem;
+  color: #adb5bd;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.logoutIcon:hover {
+  color: #51cf66;
+}
