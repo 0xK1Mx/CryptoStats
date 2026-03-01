@@ -1,13 +1,12 @@
 .signupForm {
-  min-width: 32rem;
-  max-width: 50rem;
-  min-height: 55rem;
+  min-width: 40rem;
+  max-width: 45rem;
+  min-height: 40rem;
   margin: 10rem auto;
   display: flex;
   flex-direction: column;
   gap: 2rem;
 
-  font-weight: 600;
   font-size: 1.2rem;
   letter-spacing: 0.5px;
   padding: 4rem;
@@ -18,9 +17,9 @@
 
 .formTitle {
   font-weight: 800;
-  font-size: 2.4rem;
+  font-size: 1.6rem;
   margin-bottom: 2rem;
-  color: #495057;
+  color: #212529;
 }
 
 .signupForm__group {
@@ -29,16 +28,17 @@
 }
 
 .signupForm__group > label {
+  font-weight: 400;
   margin-bottom: 1rem;
-  font-size: 2rem;
-  color: #495057;
+  font-size: 1.4rem;
+  color: #212529;
 }
 
 .signupForm__group > input {
-  font-size: 1.6rem;
-  font-weight: 600;
+  font-size: 1.4rem;
+  font-weight: 400;
   outline: none;
-  height: 6rem;
+  height: 4.5rem;
   padding: 1rem;
   color: #495057;
   border-radius: 5px;
@@ -48,6 +48,7 @@
 .signupForm__group > input::placeholder {
   color: #ced4da;
   letter-spacing: 1px;
+  font-size: 1.2rem;
 }
 
 .signupForm__group > input:focus {
@@ -63,19 +64,20 @@
   margin-top: 2rem;
   border-radius: 5px;
   border: none;
-  height: 6rem;
+  height: 4rem;
   background-color: #51cf66;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: 0.5px;
-  color: aliceblue;
+  color: #212529;
   cursor: pointer;
+  font-size: 1.4rem;
 }
 
 .authToggle {
   cursor: pointer;
   margin-top: 1rem;
-  font-size: 1.6rem;
-  color: #495057;
+  font-size: 1.2rem;
+  color: #212529;
 }
 
 .errorMsg {

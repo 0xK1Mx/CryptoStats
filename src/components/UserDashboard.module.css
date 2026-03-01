@@ -5,7 +5,8 @@
 }
 
 .user {
-  padding-top: 10rem;
+  width: 100%;
+  padding-top: 5em;
   display: flex;
   flex-direction: column;
   /* margin-right: 10rem;
@@ -26,47 +27,58 @@
 
 .overview h3 {
   font-size: 5.6rem;
-  color: #495057;
+  color: #212529;
 }
 
 .btn__add__transaction {
-  height: 4rem;
-  width: 15rem;
+  height: 3.5rem;
   margin-top: 1.5rem;
-  background-color: hsla(130, 57%, 56%, 0.5);
+  width: fit-content;
+  color: #212529;
   border: none;
-  font-weight: 800;
-  color: white;
+  border: 1px solid #888;
   border-radius: 5px;
+  font-weight: 600;
+  background-color: transparent;
 }
 
 .btn__add__transaction:hover {
   cursor: pointer;
-  background-color: hsl(130, 57%, 56%);
   transition: all 0.3s ease;
 }
 
 .assets__container {
   margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+  padding: 2rem 0 2rem 0;
 }
+
+.assets__container h3 {
+  color: #888;
+  font-size: 2rem;
+  margin-left: 4rem;
+}
+
 .asset__list {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
   padding: 0;
 }
 .asset {
-  background-color: white;
   display: flex;
   justify-content: space-between;
-  color: #495057;
+  color: #212529;
   height: 8rem;
   display: flex;
   align-items: center;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 6px 12px rgba(2, 6, 23, 0.06);
-  border: 1px solid rgba(233, 233, 233, 0.534);
+  padding: 4rem;
+  /* border-radius: 10px; */
+  /* box-shadow: 0 6px 12px rgba(2, 6, 23, 0.06);
+  border: 1px solid rgba(233, 233, 233, 0.534); */
   transition: all 0.3s ease;
 }
 
@@ -105,6 +117,7 @@
 .asset__value {
   font-size: 2rem;
   font-weight: 800;
+  color: #212529;
 }
 
 .asset__amount {

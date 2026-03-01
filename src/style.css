@@ -14,28 +14,28 @@ html {
   font-family: "roboto";
 }
 
-.hero {
+/* .hero {
   height: 60vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
-}
+} */
 .userIcon {
   width: 2.5rem;
   fill: #51cf66;
   cursor: pointer;
 }
 
-.heroContainer {
+/* .heroContainer {
   display: flex;
   position: absolute;
   align-items: end;
   justify-content: center;
   z-index: -1000;
   height: 100%;
-}
+} */
 
 .hero__img {
   /* scale: 0.5; */
@@ -91,13 +91,13 @@ html {
   height: 5rem;
   margin-bottom: 5rem;
 }
-.searchBar {
+/* .searchBar {
   width: 30rem;
   position: relative;
   left: 50%;
   top: 50;
-}
-.searchBar {
+} */
+/* .searchBar {
   width: 40rem;
   position: relative;
   left: 50%;
@@ -110,7 +110,7 @@ html {
   padding: 2rem;
   background-color: hsla(0, 0%, 0%, 0.1);
   border: 1px solid #00000027;
-}
+} */
 .market {
   margin: 0 auto;
   width: 100%;

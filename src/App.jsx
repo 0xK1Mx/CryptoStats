@@ -6,7 +6,8 @@ import Signup from "./pages/Signup";
 import Homepage from "./Pages/Homepage";
 import Market from "./components/Market";
 import UserDashboard from "./components/userDashboard";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./pages/Dashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -27,15 +28,20 @@ export default function App() {
 
   console.log(user);
   return (
-    <div className="wrapper">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Homepage isAuth={isAuth} />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/dashboard" element={<Dashboard />}></Route>
-          <Route path="/market" element={<Market />}></Route>
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Homepage isAuth={isAuth} />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route
+          path="/portfolio"
+          element={
+            <ProtectedRoute isAuth={isAuth}>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        ></Route>
+        <Route path="/market" element={<Market />}></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }

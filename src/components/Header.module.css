@@ -1,16 +1,45 @@
 .header {
-  height: 10rem;
+  height: 6rem;
   border-bottom: 1px solid #00000027;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-left: 5rem;
   padding-right: 5rem;
+  width: 100%;
+}
+
+.logo {
+  cursor: pointer;
 }
 
 .auth {
   display: flex;
   gap: 2rem;
+}
+
+.navbar__list {
+  display: flex;
+  gap: 4rem;
+  list-style: none;
+}
+
+.navbar__item {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.navbar__item:hover {
+  cursor: pointer;
+}
+
+.navbar__item > a {
+  text-decoration: none;
+  color: #212529;
+}
+
+.navbar :global(.active) {
+  color: green;
 }
 
 .btnSignUp {
@@ -27,18 +56,18 @@
 }
 
 :global(.btn) {
-  border: 1px solid #51cf66;
-  width: 12rem;
-  height: 5rem;
+  width: 9rem;
+  height: 3rem;
   border-radius: 5px;
   cursor: pointer;
   background-color: #51cf66;
   font-weight: 600;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   letter-spacing: 0.5px;
 }
 
-.btn a {
-  color: white;
+:global(.btn a) {
+  color: #212529;
+  font-size: 1.2rem;
   text-decoration: none;
 }

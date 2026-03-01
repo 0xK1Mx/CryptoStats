@@ -69,21 +69,10 @@ function Homepage({ isAuth }) {
   return (
     <>
       <Header isAuth={isAuth} />
-      {/* <div className="hero">
-        <div className="heroContainer">
-          <img src={heroImage} className="hero__img" />
-          <img src={heroImage2} className="hero__img2" />
-        </div>
-        <h1 className="title">Track your favorites crypto now!</h1>
-        <div className="cta">
-          <button className="btn">
-            <Link to="/signup">Get started</Link>
-          </button>
-        </div>
-      </div> */}
-      <MarketOverview />
+
       <div className="wrapper">
         <main>
+          <MarketOverview />
           {/* <div className="control" ref={tableRef}>
             <input placeholder="search..." type="text" className="searchBar" />
           </div> */}

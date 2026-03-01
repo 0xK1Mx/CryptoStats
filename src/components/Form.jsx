@@ -35,7 +35,7 @@ function Form() {
 
       const data = await res.json();
       if (res.ok) {
-        navigate("/dashboard");
+        navigate("/portfolio");
       } else {
         throw new Error(data.message);
       }

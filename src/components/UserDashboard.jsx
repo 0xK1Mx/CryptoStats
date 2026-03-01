@@ -61,14 +61,15 @@ function UserDashboard() {
         <div className={styles.overview}>
           <div>
             {/* <span>Balance</span> */}
-            <h3>Kim Ly</h3>
+            <h3>213,712 $</h3>
             {/* <button>Add fund</button> */}
           </div>
           <button className={styles.btn__add__transaction}>
-            Add transaction
+            + Add transaction
           </button>
         </div>
         <div className={styles.assets__container}>
+          <h3>Assets</h3>
           <ul className={styles.asset__list}>
             <li className={styles.asset}>
               <div className={styles.asset__info}>
