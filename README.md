@@ -23,18 +23,19 @@ More features will be added as development continues.
 ## 🛠 Tech Stack
 
 ### Frontend
+
 - React
 - Vite
 - React Router
 - CSS
 
 ### Backend
+
 - Node.js
 - Express
 - MongoDB
 - Mongoose
-- 
----
+- ***
 
 ## 🔐 Authentication
 
@@ -49,12 +50,8 @@ More features will be added as development continues.
 
 - Fetch live cryptocurrency market data (CoinGecko API)
 - Paginated market results
-- Formatted price & market cap display
+- Formatted price & market cap displaygit
 - Basic authentication system
 
-
-
-
+v1.0
 https://github.com/user-attachments/assets/d73442c9-1334-43d6-b0d1-5fed41abbd36
-
-

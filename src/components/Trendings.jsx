@@ -3,7 +3,7 @@ import styles from "./Trendings.module.css";
 
 function Trendings({ children, coins }) {
   //Take the first 4
-  const coinsArr = coins.splice(0, 4);
+  const coinsArr = coins.slice(0, 4);
 
   const formatter = new Intl.NumberFormat("en-US", {
     style: "decimal",
