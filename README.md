@@ -52,10 +52,7 @@ More features will be added as development continues.
 - Paginated market results
 - Formatted price & market cap displaygit
 - Basic authentication system
-
-
-v1.0
-https://github.com/user-attachments/assets/d73442c9-1334-43d6-b0d1-5fed41abbd36
+- 
 =======
 
 ## 🚀 v2.0 (Latest Version)
