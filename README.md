@@ -55,6 +55,21 @@ More features will be added as development continues.
 
 
 
-https://github.com/user-attachments/assets/d73442c9-1334-43d6-b0d1-5fed41abbd36
 
+
+## 🚀 v2.0 (Latest Version)
+
+### ✨ New Features
+
+- ⭐ Interactive Watchlist toggle (add/remove coins)
+- 💼 Portfolio dashboard with asset holdings
+- 🔐 Secure authentication using JWT (HTTP-only cookies)
+- 💾 Watchlist persistence using browser localStorage
+
+🎬 **Demo Video:**  
+[Watch v2.0 Demo](https://github.com/user-attachments/assets/4ba5cf10-00b6-4090-aec2-e7eefcb10cf3)
+
+## 📦 v1.0 (Initial Version)
+### Initials 
+[Watch Demo](https://github.com/user-attachments/assets/d73442c9-1334-43d6-b0d1-5fed41abbd36)
 
