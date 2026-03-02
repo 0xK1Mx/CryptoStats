@@ -53,5 +53,26 @@ More features will be added as development continues.
 - Formatted price & market cap displaygit
 - Basic authentication system
 
+<<<<<<< HEAD
 v1.0
 https://github.com/user-attachments/assets/d73442c9-1334-43d6-b0d1-5fed41abbd36
+=======
+
+## 🚀 v2.0 (Latest Version)
+
+### ✨ New Features
+
+- ⭐ Interactive Watchlist toggle (add/remove coins)
+- 💼 Portfolio dashboard with asset holdings
+- 💾 Watchlist persistence using browser localStorage
+
+🎬 **Demo Video:**  
+[Watch v2.0 Demo](https://github.com/user-attachments/assets/4ba5cf10-00b6-4090-aec2-e7eefcb10cf3)
+
+## 📦 v1.0 (Initial Version)
+
+### Initials
+
+[Watch Demo](https://github.com/user-attachments/assets/d73442c9-1334-43d6-b0d1-5fed41abbd36)
+
+> > > > > > > a8f2bef543e2f5ee5c7d68a789cbb45dc48edfc4
