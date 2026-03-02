@@ -33,11 +33,11 @@ function Form({ setUser }) {
         body: JSON.stringify(body),
       });
 
-      const { data } = await res.json();
-      setUser(data);
+      const data = await res.json();
 
       console.log(data);
       if (res.ok) {
+        setUser(data.data);
         navigate("/portfolio");
       } else {
         throw new Error(data.message);

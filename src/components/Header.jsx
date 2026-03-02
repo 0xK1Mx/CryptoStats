@@ -28,7 +28,9 @@ function Header({ isAuth, handleLogOut }) {
           <li className={styles.navbar__item}>
             <NavLink to={"/"}>Market</NavLink>
           </li>
-          <li className={styles.navbar__item}>Watchlist</li>
+          <li className={styles.navbar__item}>
+            <NavLink to={"/watchlist"}>Watchlist</NavLink>
+          </li>
           <li className={styles.navbar__item}>
             <NavLink to={"/portfolio"}>Portfolio</NavLink>
           </li>

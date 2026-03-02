@@ -9,7 +9,7 @@ import Market from "../components/Market";
 import Trendings from "../components/Trendings";
 import MarketOverview from "../components/MarketOverview";
 
-function Homepage({ isAuth, handleLogOut }) {
+function Homepage({ isAuth, handleLogOut, handleOnAdd, watchList }) {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const tableRef = useRef(null);
@@ -68,16 +68,14 @@ function Homepage({ isAuth, handleLogOut }) {
 
   return (
     <>
-      <div className="wrapper">
-        <main>
-          <MarketOverview />
-          {/* <div className="control" ref={tableRef}>
+      <main>
+        <MarketOverview />
+        {/* <div className="control" ref={tableRef}>
             <input placeholder="search..." type="text" className="searchBar" />
           </div> */}
-          <Market />
-          <Pagination page={page} setPage={setPage} />
-        </main>
-      </div>
+        <Market handleOnAdd={handleOnAdd} watchList={watchList} />
+        <Pagination page={page} setPage={setPage} />
+      </main>
     </>
   );
 }

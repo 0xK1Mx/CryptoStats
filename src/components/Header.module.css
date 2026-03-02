@@ -39,7 +39,7 @@
 }
 
 .navbar :global(.active) {
-  color: green;
+  color: #51cf66;
 }
 
 .btnSignUp {

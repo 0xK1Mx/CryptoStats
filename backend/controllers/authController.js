@@ -70,11 +70,16 @@ export const longIn = catchAsync(async (req, res, next) => {
 });
 
 export const logOut = catchAsync(async (req, res, next) => {
-  //Remove the cookies
-  res.clearCookie("jwt");
-  console.log("cookie cleraer");
+  res.clearCookie("jwt", {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+  });
+  console.log("loging out");
+  res.status(200).json({
+    status: "success",
+  });
 });
-
 // Implement protected routes
 export const protect = catchAsync(async (req, res, next) => {
   const token = req.cookies?.jwt;

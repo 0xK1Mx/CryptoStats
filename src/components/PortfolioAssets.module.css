@@ -1,0 +1,65 @@
+.asset__list {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+.asset {
+  display: flex;
+  justify-content: space-between;
+  color: #212529;
+  height: 8rem;
+  display: flex;
+  align-items: center;
+  padding: 4rem;
+  /* border-radius: 10px; */
+  /* box-shadow: 0 6px 12px rgba(2, 6, 23, 0.06);
+  border: 1px solid rgba(233, 233, 233, 0.534); */
+  transition: all 0.3s ease;
+}
+
+.asset:hover {
+  background-color: #f8f9fa;
+  cursor: pointer;
+}
+
+.asset__info {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  /* background-color: rebeccapurple; */
+}
+
+.asset__img {
+  width: 4rem;
+  height: 4rem;
+}
+
+.asset__name {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.asset__price {
+  font-size: 1.6rem;
+}
+
+.asset__holding {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.asset__value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #212529;
+}
+
+.asset__amount {
+  font-size: 1.6rem;
+}
+
+.watchlist {
+  display: flex;
+  gap: 1rem;
+}

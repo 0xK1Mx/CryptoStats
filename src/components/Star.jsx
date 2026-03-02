@@ -1,6 +1,6 @@
 import React from "react";
 
-function Star({ full, onClick, crypto }) {
+function Star({ isWatched, onHandleFav, el }) {
   const starStyle = {
     width: `24px`,
     height: `24px`,
@@ -9,8 +9,8 @@ function Star({ full, onClick, crypto }) {
   };
 
   return (
-    <span role="button" style={starStyle} onClick={() => onClick(crypto)}>
-      {full ? (
+    <span role="button" style={starStyle} onClick={() => onHandleFav(el)}>
+      {isWatched ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
