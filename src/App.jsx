@@ -13,20 +13,65 @@ import WatchlistAssets from "./components/WatchlistAssets";
 
 export default function App() {
   const [user, setUser] = useState(null);
-  const [watchList, setWatchlist] = useState(() => {
-    const stored = localStorage.getItem("watchList");
-    return stored ? JSON.parse(stored) : [];
-  });
+  const [watchList, setWatchlist] = useState([]);
+  const isAuth = !!user;
 
-  function handleOnAdd(coin) {
+  useEffect(() => {
+    async function loadMe() {
+      try {
+        const res = await fetch("http://localhost:8000/api/v1/users/me", {
+          credentials: "include",
+        });
+        const data = await res.json();
+        if (res.ok) setUser(data.user);
+        else setUser(null);
+      } catch {
+        setUser(null);
+      }
+    }
+    loadMe();
+  }, []);
+
+  useEffect(() => {
+    if (isAuth) {
+      setWatchlist(user.watchList || []);
+    } else {
+      const stored = localStorage.getItem("watchList");
+      setWatchlist(stored ? JSON.parse(stored) : []);
+    }
+  }, [user, isAuth]);
+
+  //Set watchlist to localstorage
+  useEffect(() => {
+    localStorage.setItem("watchList", JSON.stringify(watchList));
+  }, [watchList]);
+
+  async function handleOnAdd(coin) {
     //check if coin is already there
     const isWatched = watchList.some((el) => el.id === coin.id);
 
-    if (isWatched) {
-      setWatchlist((watchList) => watchList.filter((el) => el.id !== coin.id));
-    } else {
-      setWatchlist((watchList) => [...watchList, coin]);
+    if (!isAuth) {
+      if (isWatched) {
+        setWatchlist((watchList) =>
+          watchList.filter((el) => el.id !== coin.id),
+        );
+      } else {
+        setWatchlist((watchList) => [...watchList, coin]);
+      }
+      return;
     }
+    const method = isWatched ? "DELETE" : "POST";
+
+    const res = await fetch("http://localhost:8000/api/v1/users/watchlist", {
+      method,
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(coin),
+    });
+
+    const data = await res.json();
+    console.log(data.user.watchList);
+    setWatchlist(data.user.watchList);
   }
 
   async function handleLogOut() {
@@ -35,16 +80,10 @@ export default function App() {
       credentials: "include",
     });
 
+    setWatchlist([]);
     const data = await res.json();
     setUser(null);
   }
-
-  //Set watchlist to localstorage
-  useEffect(() => {
-    localStorage.setItem("watchList", JSON.stringify(watchList));
-  }, [watchList]);
-
-  const isAuth = !!user;
 
   return (
     <BrowserRouter>

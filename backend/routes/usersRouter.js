@@ -20,7 +20,7 @@ router.post("/watchlist", protect, async function (req, res, next) {
 
   console.log(alreadyExists);
   if (!alreadyExists) {
-    user.watchList.push(req.body);
+    user.watchList.unshift(req.body);
     await user.save();
   }
 
@@ -29,6 +29,19 @@ router.post("/watchlist", protect, async function (req, res, next) {
     user,
   });
 });
+
+router.delete("/watchlist", protect, async function (req, res, next) {
+  const user = await User.findById(req.user.id);
+
+  user.watchList = user.watchList.filter((el) => el.id !== req.body.id);
+  await user.save();
+
+  res.status(200).json({
+    status: "success",
+    user,
+  });
+});
+
 router.get("/me", protect, getuser);
 router.post("/signup", signUp);
 router.post("/login", longIn);
