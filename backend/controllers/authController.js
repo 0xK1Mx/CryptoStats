@@ -47,7 +47,7 @@ export const signUp = catchAsync(async (req, res, next) => {
   generateJWT(newUser, 201, res);
 });
 
-export const longIn = catchAsync(async (req, res, next) => {
+export const login = catchAsync(async (req, res, next) => {
   //Check if there email or password
   if (!req.body.email || !req.body.password) {
     return next(new AppError("Please enter a valid email and password", 400));

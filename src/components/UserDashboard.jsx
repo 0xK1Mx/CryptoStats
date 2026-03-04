@@ -20,7 +20,16 @@ function UserDashboard() {
     fetchData();
   }, []);
 
-  const listCrypto = user.watchList.map((crypto, i) => {
+  const handleAddFavoris = function (crypto) {
+    fetch("http://localhost:8000/api/v1/users/watchlist", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify(crypto),
+    });
+  };
+
+  const listCrypto = user?.watchList?.map((crypto, i) => {
     return (
       <tr className="market__row">
         <td className="market__cell market__cell--rank ">{i + 1}</td>

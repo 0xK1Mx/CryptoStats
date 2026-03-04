@@ -1,7 +1,7 @@
 import express from "express";
 
 import {
-  longIn,
+  login,
   protect,
   forgotPassword,
   resetPassword,
@@ -44,7 +44,7 @@ router.delete("/watchlist", protect, async function (req, res, next) {
 
 router.get("/me", protect, getuser);
 router.post("/signup", signUp);
-router.post("/login", longIn);
+router.post("/login", login);
 router.post("/logout", logOut);
 
 router.post("/forgotpwd", forgotPassword);

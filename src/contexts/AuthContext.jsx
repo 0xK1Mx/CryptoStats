@@ -6,7 +6,7 @@ const AuthContext = createContext();
 
 const initialState = {
   user: null,
-  isAuthentificated: false,
+  isAuthenticated: false,
   isAuthLoading: true,
 };
 
@@ -16,21 +16,21 @@ function reducer(state, action) {
       return {
         ...state,
         user: action.payload,
-        isAuthentificated: true,
+        isAuthenticated: true,
         isAuthLoading: false,
       };
     case "signup":
       return {
         ...state,
         user: action.payload,
-        isAuthentificated: true,
+        isAuthenticated: true,
         isAuthLoading: false,
       };
     case "logout":
       return {
         ...state,
         user: null,
-        isAuthentificated: false,
+        isAuthenticated: false,
         isAuthLoading: false,
       };
     case "auth/loading":
@@ -46,7 +46,7 @@ function reducer(state, action) {
 
 //Provide the context
 function AuthProvider({ children }) {
-  const [{ user, isAuthentificated, isAuthLoading }, dispatch] = useReducer(
+  const [{ user, isAuthenticated, isAuthLoading }, dispatch] = useReducer(
     reducer,
     initialState,
   );
@@ -57,7 +57,7 @@ function AuthProvider({ children }) {
 
   const navigate = useNavigate();
 
-  async function singUp(email, password, confirmPassword) {
+  async function signup(email, password, confirmPassword) {
     try {
       const res = await fetch("http://localhost:8000/api/v1/users/signup", {
         method: "POST",
@@ -141,10 +141,10 @@ function AuthProvider({ children }) {
     <AuthContext.Provider
       value={{
         user,
-        isAuthentificated,
+        isAuthenticated,
         isAuthLoading,
         login,
-        singUp,
+        signup,
         logout,
         loadUser,
       }}

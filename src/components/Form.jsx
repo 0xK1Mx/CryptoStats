@@ -6,7 +6,7 @@ import Loading from "./Loading";
 import { useAuth } from "../contexts/AuthContext";
 
 function Form({ isLoading, setIsLoading }) {
-  const { login, singUp, isAuthentificated, isAuthLoading } = useAuth();
+  const { login, signup, isAuthenticated, isAuthLoading } = useAuth();
 
   const [isLogin, setIsLogin] = React.useState(false);
   const [email, setEmail] = React.useState("");
@@ -20,9 +20,9 @@ function Form({ isLoading, setIsLoading }) {
 
     setIsLoading(true);
 
-    isLogin ? login(email, password) : singUp(email, password, confirmPassword);
+    isLogin ? login(email, password) : signup(email, password, confirmPassword);
 
-    if (isAuthentificated) {
+    if (isAuthenticated) {
       setEmail("");
       setPassword("");
       setConfirmPassword("");

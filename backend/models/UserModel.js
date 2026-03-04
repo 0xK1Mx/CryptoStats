@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: [true, "This email is already associated with an account"],
-    valide: {
+    validate: {
       validator: validator.isEmail,
       message: "Please provide an valid email",
     },

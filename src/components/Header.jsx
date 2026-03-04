@@ -4,7 +4,7 @@ import { NavLink, Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 function Header() {
-  const { isAuthentificated, logout } = useAuth();
+  const { isAuthenticated, logout } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
 
   function closeMenu() {
@@ -59,7 +59,7 @@ function Header() {
           </li>
 
           {/* ✅ Auth inside dropdown (mobile only via CSS) */}
-          {!isAuthentificated ? (
+          {!isAuthenticated ? (
             <li
               className={`${styles.navbar__item} ${styles.navbar__authItem}`}
               onClick={closeMenu}
@@ -86,13 +86,13 @@ function Header() {
 
         {/* Desktop auth stays here (hidden on mobile via CSS) */}
         <div className={styles.auth}>
-          {!isAuthentificated && (
+          {!isAuthenticated && (
             <button className="btn">
               <Link to="/signup">Get started</Link>
             </button>
           )}
 
-          {isAuthentificated && (
+          {isAuthenticated && (
             <span role="button" className="userIcon" onClick={logout}>
               <Link to="/">
                 <i className={`las la-sign-out-alt ${styles.logoutIcon}`}></i>

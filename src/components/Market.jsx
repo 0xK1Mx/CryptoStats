@@ -28,7 +28,12 @@ function Market({ handleOnAdd, watchList }) {
 
   const cryptoList = data.map((el) => {
     return (
-      <MarketRow handleOnAdd={handleOnAdd} el={el} watchList={watchList} />
+      <MarketRow
+        key={el.id}
+        handleOnAdd={handleOnAdd}
+        el={el}
+        watchList={watchList}
+      />
     );
   });
 

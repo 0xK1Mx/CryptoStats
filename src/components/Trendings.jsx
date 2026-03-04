@@ -15,13 +15,15 @@ function Trendings({ children, coins }) {
   console.log(coinsArr);
   const list = coinsArr.map((el) => {
     return (
-      <li className={styles.container__item} key={crypto.randomUUID}>
+      <li className={styles.container__item} key={el.id || el.name}>
         <div className={styles.asset}>
           <img className={styles.asset__icon} src={el.image} />
           <span className={styles.asset__name}>{el.name}</span>
         </div>
         <div className={styles.asset__price}>
-          <span className={styles.price}>{formatter.format(el.price)} $</span>
+          <span className={styles.price}>
+            {formatter.format(el.current_price)} $
+          </span>
         </div>
       </li>
     );

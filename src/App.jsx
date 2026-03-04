@@ -13,27 +13,27 @@ import { useAuth } from "./contexts/AuthContext";
 export default function App() {
   const [watchList, setWatchlist] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const { isAuthentificated, user } = useAuth();
+  const { isAuthenticated, user } = useAuth();
 
   useEffect(() => {
-    if (isAuthentificated) {
+    if (isAuthenticated) {
       setWatchlist(user?.watchList || []);
     } else {
       const stored = localStorage.getItem("watchList");
       setWatchlist(stored ? JSON.parse(stored) : []);
     }
-  }, [user, isAuthentificated]);
+  }, [user, isAuthenticated]);
 
   useEffect(() => {
-    if (!isAuthentificated) {
+    if (!isAuthenticated) {
       localStorage.setItem("watchList", JSON.stringify(watchList));
     }
-  }, [watchList, isAuthentificated]);
+  }, [watchList, isAuthenticated]);
 
   async function handleOnAdd(coin) {
     const isWatched = watchList.some((el) => el.id === coin.id);
 
-    if (!isAuthentificated) {
+    if (!isAuthenticated) {
       setWatchlist((prev) =>
         isWatched ? prev.filter((el) => el.id !== coin.id) : [...prev, coin],
       );
