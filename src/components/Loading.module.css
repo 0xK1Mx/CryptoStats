@@ -1,0 +1,24 @@
+/* CREDIT: https://dev.to/afif/i-made-100-css-loaders-for-your-next-project-4eje */
+
+[class*="classic"]:before {
+  content: "Loading...";
+}
+
+.classic-1 {
+  font-weight: bold;
+  font-family: sans-serif;
+  font-size: 30px;
+  animation: c1 1s linear infinite alternate;
+  color: #888;
+}
+@keyframes c1 {
+  to {
+    opacity: 0;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* CREDIT: https://dev.to/afif/i-made-100-css-loaders-for-your-next-project-4eje */

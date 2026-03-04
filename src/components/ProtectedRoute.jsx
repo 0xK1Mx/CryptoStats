@@ -1,21 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Navigate } from "react-router-dom";
+import { AuthContext } from "./AuthContext";
+import { useAuth } from "../contexts/AuthContext";
 
-function ProtectedRoute({ children, isAuth }) {
-  if (!isAuth) return <Navigate to="/signup" replace />;
+function ProtectedRoute({ children }) {
+  const { isAuthentificated, isAuthLoading } = useAuth();
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const res = await fetch("http://localhost:8000/api/v1/users/me", {
-          credentials: "include",
-        });
-        const { user: data } = await res.json();
-        setUser(data);
-      } catch (error) {}
-    }
-    fetchData();
-  }, []);
+  if (isAuthLoading) return null;
+
+  if (!isAuthentificated) return <Navigate to="/signup" replace />;
 
   return children;
 }

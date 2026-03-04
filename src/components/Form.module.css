@@ -73,6 +73,10 @@
   font-size: 1.4rem;
 }
 
+.signupForm__button:disabled {
+  background-color: oklch(76.025% 0.18314 146.629 / 0.5);
+}
+
 .authToggle {
   cursor: pointer;
   margin-top: 1rem;

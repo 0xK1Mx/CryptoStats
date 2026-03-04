@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Form.module.css";
 
-import Header from "./Header";
+import { AuthContext } from "./AuthContext";
+import Loading from "./Loading";
+import { useAuth } from "../contexts/AuthContext";
 
-function Form({ setUser }) {
-  const navigate = useNavigate();
+function Form({ isLoading, setIsLoading }) {
+  const { login, singUp, isAuthentificated } = useAuth();
 
   const [isLogin, setIsLogin] = React.useState(false);
   const [email, setEmail] = React.useState("");
@@ -13,49 +15,68 @@ function Form({ setUser }) {
   const [confirmPassword, setConfirmPassword] = React.useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = async (e) => {
+  function handleSubmit(e) {
     setError("");
     e.preventDefault();
 
-    const url = isLogin
-      ? "http://localhost:8000/api/v1/users/login"
-      : "http://localhost:8000/api/v1/users/signup";
+    setIsLoading(true);
 
-    const body = isLogin
-      ? { email, password }
-      : { email, password, passwordConfirm: confirmPassword };
+    isLogin ? login(email, password) : singUp(email, password, confirmPassword);
 
-    try {
-      const res = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify(body),
-      });
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
+    setIsLoading(false);
+  }
 
-      const data = await res.json();
+  // const handleSubmit = async (e) => {
 
-      if (res.ok) {
-        setUser(data.data);
-        navigate("/portfolio");
-      } else {
-        throw new Error(data.message);
-      }
-    } catch (error) {
-      setError(error.message);
-      console.log(error);
-    } finally {
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
-    }
-  };
+  //   setError("");
+  //   e.preventDefault();
+
+  //   setIsLoading(true);
+
+  //   isLogin ? login(email,password) ? singUp(email, password, confirmPassword)
+  //   const url = isLogin
+  //     ? "http://localhost:8000/api/v1/users/login"
+  //     : "http://localhost:8000/api/v1/users/signup";
+
+  //   const body = isLogin
+  //     ? { email, password }
+  //     : { email, password, passwordConfirm: confirmPassword };
+
+  //   try {
+  //     const res = await fetch(url, {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       credentials: "include",
+  //       body: JSON.stringify(body),
+  //     });
+
+  //     const data = await res.json();
+
+  //     if (res.ok) {
+  //       setUser(data.data);
+  //       navigate("/portfolio");
+  //     } else {
+  //       throw new Error(data.message);
+  //     }
+  //   } catch (error) {
+  //     setError(error.message);
+  //   }
+  //   finally {
+  //     setEmail("");
+  //     setPassword("");
+  //     setConfirmPassword("");
+  //     setIsLoading(false);
+  //   }
+  // };
 
   return (
     <>
       <form className={styles.signupForm} onSubmit={handleSubmit}>
         <h2 className={styles.formTitle}>
-          {isLogin ? "Login" : "Create your account account"}
+          {isLogin ? "Login" : "Create your account"}
         </h2>
 
         <div className={styles.signupForm__group}>
@@ -94,11 +115,9 @@ function Form({ setUser }) {
           </div>
         )}
 
-        {isLogin
-          ? error && <ErrorMsg>{error}</ErrorMsg>
-          : error && <ErrorMsg>{error}</ErrorMsg>}
-        <button className={styles.signupForm__button}>
-          {isLogin ? "Login" : "Sign Up"}
+        {isLogin && error && <ErrorMsg>{error}</ErrorMsg>}
+        <button className={styles.signupForm__button} disabled={isLoading}>
+          {isLoading ? <Loading /> : isLogin ? "Login" : "Sign Up"}
         </button>
         <div
           className={styles.authToggle}

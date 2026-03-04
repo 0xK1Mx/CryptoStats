@@ -5,17 +5,17 @@ import styles from "./userDashboard.module.css";
 import { Link } from "react-router-dom";
 import PortfolioAssets from "./PortfolioAssets";
 import AssetsContainer from "./AssetsContainer";
+import { useAuth } from "../contexts/AuthContext";
 
 function UserDashboard() {
-  const [user, setUser] = useState({ watchList: [] });
+  const { user } = useAuth();
+
   useEffect(() => {
     async function fetchData() {
       try {
         const res = await fetch("http://localhost:8000/api/v1/users/me", {
           credentials: "include",
         });
-        const { user: data } = await res.json();
-        setUser(data);
       } catch (error) {}
     }
     fetchData();

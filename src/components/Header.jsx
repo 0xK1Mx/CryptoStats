@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Header.module.css";
 import { NavLink, Link } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
-function Header({ isAuth, handleLogOut }) {
+function Header() {
+  const { isAuthentificated, logout } = useAuth();
   return (
     <header className={styles.header}>
       <Link to={"/"}>
@@ -37,15 +39,15 @@ function Header({ isAuth, handleLogOut }) {
         </ul>
       </nav>
       <div className={styles.auth}>
-        {!isAuth && (
+        {!isAuthentificated && (
           <>
             <button className="btn">
               <Link to="/signup">Get started</Link>
             </button>
           </>
         )}
-        {isAuth && (
-          <span role="button" className="userIcon" onClick={handleLogOut}>
+        {isAuthentificated && (
+          <span role="button" className="userIcon" onClick={logout}>
             <Link to="/">
               <i className={`las la-sign-out-alt ${styles.logoutIcon}`}></i>
             </Link>

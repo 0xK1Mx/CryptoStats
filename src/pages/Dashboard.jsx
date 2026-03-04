@@ -4,7 +4,7 @@ import UserDashboard from "../components/userDashboard";
 import styles from "./Dashboard.module.css";
 import Header from "../components/Header";
 
-function Dashboard({ isAuth, handleLogOut }) {
+function Dashboard() {
   return (
     <>
       <div className="wrapper">

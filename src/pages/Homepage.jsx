@@ -9,7 +9,7 @@ import Market from "../components/Market";
 import Trendings from "../components/Trendings";
 import MarketOverview from "../components/MarketOverview";
 
-function Homepage({ isAuth, handleLogOut, handleOnAdd, watchList }) {
+function Homepage({ handleOnAdd, watchList }) {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const tableRef = useRef(null);

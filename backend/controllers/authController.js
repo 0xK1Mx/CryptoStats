@@ -78,6 +78,7 @@ export const logOut = catchAsync(async (req, res, next) => {
   console.log("loging out");
   res.status(200).json({
     status: "success",
+    user: null,
   });
 });
 // Implement protected routes

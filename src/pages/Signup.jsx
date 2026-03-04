@@ -1,7 +1,9 @@
 import React from "react";
 import Form from "../components/Form";
-function Signup({ setUser }) {
-  return <Form setUser={setUser} />;
+function Signup({ setUser, isLoading, setIsLoading }) {
+  return (
+    <Form setUser={setUser} isLoading={isLoading} setIsLoading={setIsLoading} />
+  );
 }
 
 export default Signup;
