@@ -7,12 +7,15 @@ import Homepage from "./pages/Homepage";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Header from "./components/Header";
+import ErrorBoundary from "./components/ErrorBoundary";
 import WatchlistAssets from "./components/WatchlistAssets";
 import { useAuth } from "./contexts/AuthContext";
+import { api, APIError } from "./api/client";
 
 export default function App() {
   const [watchList, setWatchlist] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   const { isAuthenticated, user } = useAuth();
 
   useEffect(() => {
@@ -40,55 +43,56 @@ export default function App() {
       return;
     }
 
-    const method = isWatched ? "DELETE" : "POST";
-
-    const res = await fetch("http://localhost:8000/api/v1/users/watchlist", {
-      method,
-      credentials: "include",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(coin),
-    });
-
-    const data = await res.json();
-    setWatchlist(data.user.watchList);
+    try {
+      const method = isWatched ? "removeFromWatchlist" : "addToWatchlist";
+      const data = await api[method](coin);
+      setWatchlist(data.user.watchList);
+    } catch (err) {
+      const errorMessage =
+        err instanceof APIError ? err.message : "Failed to update watchlist";
+      setError(errorMessage);
+      console.error("Watchlist error:", err);
+    }
   }
 
   return (
-    <>
-      <Header />
-      <div className="wrapper">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Homepage handleOnAdd={handleOnAdd} watchList={watchList} />
-            }
-          />
-          <Route
-            path="/watchlist"
-            element={
-              <WatchlistAssets
-                watchList={watchList}
-                handleOnAdd={handleOnAdd}
-              />
-            }
-          />
-          <Route
-            path="/portfolio"
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/signup"
-            element={
-              <Signup isLoading={isLoading} setIsLoading={setIsLoading} />
-            }
-          />
-        </Routes>
-      </div>
-    </>
+    <ErrorBoundary>
+      <>
+        <Header />
+        <div className="wrapper">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Homepage handleOnAdd={handleOnAdd} watchList={watchList} />
+              }
+            />
+            <Route
+              path="/watchlist"
+              element={
+                <WatchlistAssets
+                  watchList={watchList}
+                  handleOnAdd={handleOnAdd}
+                />
+              }
+            />
+            <Route
+              path="/portfolio"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/signup"
+              element={
+                <Signup isLoading={isLoading} setIsLoading={setIsLoading} />
+              }
+            />
+          </Routes>
+        </div>
+      </>
+    </ErrorBoundary>
   );
 }

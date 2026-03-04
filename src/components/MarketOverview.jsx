@@ -1,68 +1,67 @@
 import Trendings from "./Trendings";
 import styles from "./MarketOverview.module.css";
 import React, { useEffect, useState } from "react";
+import { api } from "../api/client";
 
 function MarketOverview() {
   const [trendings, setTrendings] = useState([]);
   const [newCoins, setNewCoins] = useState([]);
   const [topGainers, setTopGainers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  useEffect(function () {
-    async function fetchTrendings() {
+  useEffect(() => {
+    async function fetchMarketData() {
       try {
-        const res = await fetch("http://localhost:5000/market");
+        setLoading(true);
+        setError(null);
+        const data = await api.getMarketData();
 
-        const data = await res.json();
-        const refactorData = (data.trending ?? []).map(({ item }) => {
-          return {
-            name: item.name,
-            price: item.data.price,
-            image: item.large,
-          };
-        });
-        setTrendings(refactorData);
-      } catch (error) {}
+        const refactorTrendings = (data.trending ?? []).map(({ item }) => ({
+          id: item.id,
+          name: item.name,
+          current_price: item.data.price,
+          image: item.large,
+        }));
+
+        const refactorNewCoins = (data.newCoins ?? []).map((el) => ({
+          id: el.id,
+          name: el.name,
+          current_price: el.current_price,
+          image: el.image,
+        }));
+
+        const refactorTopGainers = (data.top_gainers ?? []).map((el) => ({
+          id: el.id,
+          name: el.name,
+          current_price: el.current_price,
+          image: el.image,
+        }));
+
+        setTrendings(refactorTrendings);
+        setNewCoins(refactorNewCoins);
+        setTopGainers(refactorTopGainers);
+      } catch (err) {
+        setError("Failed to load market overview");
+        console.error("Market overview fetch error:", err);
+      } finally {
+        setLoading(false);
+      }
     }
-    fetchTrendings();
+
+    fetchMarketData();
   }, []);
 
-  useEffect(function () {
-    async function fetchNewCoins() {
-      try {
-        const res = await fetch("http://localhost:5000/market");
-
-        const data = await res.json();
-        const refactorData = (data.newCoins ?? []).map((el) => {
-          return {
-            name: el.name,
-            price: el.current_price,
-            image: el.image,
-          };
-        });
-        setNewCoins(refactorData);
-      } catch (error) {}
-    }
-    fetchNewCoins();
-  }, []);
-
-  useEffect(function () {
-    async function fetchTopGainers() {
-      try {
-        const res = await fetch("http://localhost:5000/market");
-
-        const data = await res.json();
-        const refactorData = (data.top_gainers ?? []).map((el) => {
-          return {
-            name: el.name,
-            price: el.current_price,
-            image: el.image,
-          };
-        });
-        setTopGainers(refactorData);
-      } catch (error) {}
-    }
-    fetchTopGainers();
-  }, []);
+  if (error)
+    return (
+      <div style={{ color: "#f44336", textAlign: "center", padding: "20px" }}>
+        ⚠️ {error}
+      </div>
+    );
+  if (loading)
+    return (
+      <div style={{ textAlign: "center", padding: "20px" }}>Loading...</div>
+    );
 
   return (
     <div className={styles.market__overview}>

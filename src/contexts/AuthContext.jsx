@@ -1,8 +1,6 @@
 import React, { createContext, useContext, useEffect, useReducer } from "react";
 import { useNavigate } from "react-router-dom";
-
-//Create the Auth Context
-const AuthContext = createContext();
+import { api, APIError } from "../api/client";
 
 const initialState = {
   user: null,
@@ -45,11 +43,15 @@ function reducer(state, action) {
 }
 
 //Provide the context
+//Create the Auth Context
+const AuthContext = createContext();
+
 function AuthProvider({ children }) {
   const [{ user, isAuthenticated, isAuthLoading }, dispatch] = useReducer(
     reducer,
     initialState,
   );
+  const [error, setError] = React.useState(null);
 
   useEffect(() => {
     loadUser();
@@ -58,82 +60,62 @@ function AuthProvider({ children }) {
   const navigate = useNavigate();
 
   async function signup(email, password, confirmPassword) {
+    setError(null);
     try {
-      const res = await fetch("http://localhost:8000/api/v1/users/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({
-          email,
-          password,
-          passwordConfirm: confirmPassword,
-        }),
-      });
-
-      const data = await res.json();
-
-      if (res.ok) {
-        dispatch({ type: "signup", payload: data.data });
-        navigate("/portfolio");
-      } else {
-        throw new Error("sign up error");
-      }
-    } catch (error) {
-      console.log(error);
+      const data = await api.signup(email, password, confirmPassword);
+      dispatch({ type: "signup", payload: data.data });
+      navigate("/portfolio");
+      return { success: true };
+    } catch (err) {
+      const message =
+        err instanceof APIError
+          ? err.message
+          : "Signup failed. Please try again.";
+      setError(message);
+      console.error("Signup error:", err);
+      return { success: false, error: message };
     }
   }
 
   async function login(email, password) {
+    setError(null);
     dispatch({ type: "auth/loading" });
 
     try {
-      //
-      const res = await fetch("http://localhost:8000/api/v1/users/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await res.json();
-
-      //
-      if (!res.ok) throw new Error(data.message || "Login failed");
+      const data = await api.login(email, password);
 
       setTimeout(() => {
         dispatch({ type: "login", payload: data.data });
         navigate("/portfolio");
       }, 700);
-    } catch (error) {
-      console.log(error);
+      return { success: true };
+    } catch (err) {
+      const message =
+        err instanceof APIError
+          ? err.message
+          : "Login failed. Please try again.";
+      setError(message);
+      dispatch({ type: "authDone" });
+      console.error("Login error:", err);
+      return { success: false, error: message };
     }
   }
 
   async function logout() {
     try {
-      const res = await fetch("http://localhost:8000/api/v1/users/logout", {
-        method: "POST",
-        credentials: "include",
-      });
-
+      await api.logout();
       dispatch({ type: "logout" });
       navigate("/");
-    } catch (error) {}
+    } catch (err) {
+      console.error("Logout error:", err);
+    }
   }
+
   async function loadUser() {
     try {
-      const res = await fetch("http://localhost:8000/api/v1/users/me", {
-        credentials: "include",
-      });
-
-      if (!res.ok) {
-        dispatch({ type: "authDone" });
-        return;
-      }
-
-      const data = await res.json();
+      const data = await api.getMe();
       dispatch({ type: "login", payload: data.user });
-    } catch {
+    } catch (err) {
       dispatch({ type: "authDone" });
     }
   }
@@ -147,6 +129,8 @@ function AuthProvider({ children }) {
         signup,
         logout,
         loadUser,
+        error,
+        setError,
       }}
     >
       {children}
@@ -157,7 +141,8 @@ function AuthProvider({ children }) {
 function useAuth() {
   const context = useContext(AuthContext);
 
-  if (context === undefined) throw new Error("The Auth context is use outside");
+  if (context === undefined)
+    throw new Error("Auth context used outside of provider");
 
   return context;
 }

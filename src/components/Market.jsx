@@ -1,65 +1,52 @@
-import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import heroImage from "./../assets/hero.png";
-import heroImage2 from "./../assets/hero2.png";
-import Pagination from "../components/Pagination";
-import Star from "./../components/Star";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Market.module.css";
-import "./../style.css";
+import Pagination from "../components/Pagination";
+import Star from "../components/Star";
 import Sidebar from "./Sidebar";
 import MarketRow from "./MarketRow";
+import { api } from "../api/client";
+import { formatCompactNumber } from "../utils/format";
+
 function Market({ handleOnAdd, watchList }) {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  useEffect(function () {
+  useEffect(() => {
     async function fetchData() {
-      const res = await fetch("http://localhost:5000/market");
-
-      const { market } = await res.json();
-      setData(market);
+      try {
+        setIsLoading(true);
+        setError(null);
+        const response = await api.getMarketData();
+        setData(response.market || []);
+      } catch (err) {
+        setError("Failed to load market data");
+        console.error("Market fetch error:", err);
+      } finally {
+        setIsLoading(false);
+      }
     }
 
     fetchData();
   }, []);
 
-  console.log(data);
+  const cryptoList = data.map((el) => (
+    <MarketRow
+      key={el.id}
+      handleOnAdd={handleOnAdd}
+      el={el}
+      watchList={watchList}
+    />
+  ));
 
-  const cryptoList = data.map((el) => {
-    return (
-      <MarketRow
-        key={el.id}
-        handleOnAdd={handleOnAdd}
-        el={el}
-        watchList={watchList}
-      />
-    );
-  });
-
-  function formatCompactNumber(number) {
-    if (number < 1000) {
-      return number;
-    } else if (number >= 1000 && number < 1_000_000) {
-      return (number / 1000).toFixed(1).replace(/\.0$/, "") + " K";
-    } else if (number >= 1_000_000 && number < 1_000_000_000) {
-      return (number / 1_000_000).toFixed(1).replace(/\.0$/, "") + " M";
-    } else if (number >= 1_000_000_000 && number < 1_000_000_000_000) {
-      return (number / 1_000_000_000).toFixed(1).replace(/\.0$/, "") + " B";
-    } else if (number >= 1_000_000_000_000 && number < 1_000_000_000_000_000) {
-      return (number / 1_000_000_000_000).toFixed(1).replace(/\.0$/, "") + " T";
-    }
-    return number;
+  if (error) {
+    return <div className={styles.error}>⚠️ {error}</div>;
   }
 
-  const handleAddFavoris = function (crypto) {
-    fetch("http://localhost:8000/api/v1/users/watchlist", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify(crypto),
-    });
-  };
+  if (isLoading) {
+    return <div className={styles.loading}>Loading market data...</div>;
+  }
 
   return (
     <div className={styles.market}>

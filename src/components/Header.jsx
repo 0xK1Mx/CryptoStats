@@ -32,7 +32,6 @@ function Header() {
           </span>
         </Link>
 
-        {/* ✅ Hamburger button (mobile) */}
         <button
           className={styles.menuBtn}
           aria-label="Toggle menu"
@@ -58,7 +57,6 @@ function Header() {
             <NavLink to={"/watchlist"}>Watchlist</NavLink>
           </li>
 
-          {/* ✅ Auth inside dropdown (mobile only via CSS) */}
           {!isAuthenticated ? (
             <li
               className={`${styles.navbar__item} ${styles.navbar__authItem}`}
