@@ -1,19 +1,17 @@
 /* CREDIT: https://dev.to/afif/i-made-100-css-loaders-for-your-next-project-4eje */
 
-[class*="classic"]:before {
-  content: "Loading...";
+.dots1 {
+  width: 20px;
+  aspect-ratio: 4;
+  background: radial-gradient(circle closest-side, #888 90%, #0000) 0 /
+    calc(100% / 3) 100% space;
+  clip-path: inset(0 100% 0 0);
+  animation: d1 1s steps(4) infinite;
+  margin: 0 auto;
 }
-
-.classic-1 {
-  font-weight: bold;
-  font-family: sans-serif;
-  font-size: 30px;
-  animation: c1 1s linear infinite alternate;
-  color: #888;
-}
-@keyframes c1 {
+@keyframes d1 {
   to {
-    opacity: 0;
+    clip-path: inset(0 -34% 0 0);
   }
 }
 

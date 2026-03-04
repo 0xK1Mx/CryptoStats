@@ -63,7 +63,7 @@ function Market({ handleOnAdd, watchList }) {
         <div className={styles.rank}>#</div>
         <div className={styles.crypto}>Name</div>
         <div className={styles.price}>Price</div>
-        <div className={styles.price}>24H%</div>
+        <div className={styles.dailyChange}>24H%</div>
         <div className={styles.marketCap}>Market Cap</div>
         <div className={styles.volume}>Volume</div>
         <div className={styles.supply}>Circulating supply</div>

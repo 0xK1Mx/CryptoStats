@@ -33,6 +33,9 @@ function reducer(state, action) {
         isAuthentificated: false,
         isAuthLoading: false,
       };
+    case "auth/loading":
+      return { ...state, isAuthLoading: true };
+
     case "authDone":
       return { ...state, isAuthLoading: false };
 
@@ -81,6 +84,8 @@ function AuthProvider({ children }) {
   }
 
   async function login(email, password) {
+    dispatch({ type: "auth/loading" });
+
     try {
       //
       const res = await fetch("http://localhost:8000/api/v1/users/login", {
@@ -93,12 +98,12 @@ function AuthProvider({ children }) {
       const data = await res.json();
 
       //
-      if (res.ok) {
+      if (!res.ok) throw new Error(data.message || "Login failed");
+
+      setTimeout(() => {
         dispatch({ type: "login", payload: data.data });
         navigate("/portfolio");
-      } else {
-        throw new Error("login error");
-      }
+      }, 700);
     } catch (error) {
       console.log(error);
     }

@@ -33,6 +33,46 @@
 .supply {
   text-align: center;
 }
+
+/* <= 85rem */
+@media (max-width: 85rem) {
+  .row {
+    grid-template-columns: 5% 25% 15% 5% 20% 20% 10%;
+  }
+  .supply {
+    display: none;
+  }
+}
+
+/* <= 60rem */
+@media (max-width: 60rem) {
+  .row {
+    grid-template-columns: 10% 20% 20% 20% 20% 10%;
+  }
+
+  .dailyChange,
+  .supply {
+    display: none;
+  }
+}
+
+/* <= 44rem */
+@media (max-width: 50rem) {
+  .row {
+    grid-template-columns: 10% 45% 35% 10%;
+    padding: 1.2rem 0.8rem;
+    height: auto;
+    min-height: 6.5rem;
+  }
+
+  .marketCap,
+  .volume,
+  .dailyChange,
+  .supply {
+    display: none;
+  }
+}
+
 .asset {
   display: flex;
   align-items: center;
@@ -47,7 +87,6 @@
   letter-spacing: 0.5px;
 }
 
-/* State */
 .positive {
   color: #51cf66;
 }

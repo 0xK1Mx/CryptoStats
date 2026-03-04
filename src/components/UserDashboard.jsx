@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 
 import styles from "./userDashboard.module.css";
-import { Link } from "react-router-dom";
 import PortfolioAssets from "./PortfolioAssets";
 import AssetsContainer from "./AssetsContainer";
 import { useAuth } from "../contexts/AuthContext";

@@ -4,8 +4,6 @@ import React, { useState, useEffect } from "react";
 import "./style.css";
 import Signup from "./pages/Signup";
 import Homepage from "./Pages/Homepage";
-import Market from "./components/Market";
-import UserDashboard from "./components/userDashboard";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Header from "./components/Header";

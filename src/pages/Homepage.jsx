@@ -1,12 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import heroImage from "./../assets/hero.png";
-import heroImage2 from "./../assets/hero2.png";
+
 import Pagination from "../components/Pagination";
-import Header from "../components/Header";
-import Star from "./../components/Star";
 import Market from "../components/Market";
-import Trendings from "../components/Trendings";
 import MarketOverview from "../components/MarketOverview";
 
 function Homepage({ handleOnAdd, watchList }) {

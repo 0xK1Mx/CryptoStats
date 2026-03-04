@@ -2,12 +2,11 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Form.module.css";
 
-import { AuthContext } from "./AuthContext";
 import Loading from "./Loading";
 import { useAuth } from "../contexts/AuthContext";
 
 function Form({ isLoading, setIsLoading }) {
-  const { login, singUp, isAuthentificated } = useAuth();
+  const { login, singUp, isAuthentificated, isAuthLoading } = useAuth();
 
   const [isLogin, setIsLogin] = React.useState(false);
   const [email, setEmail] = React.useState("");
@@ -23,54 +22,13 @@ function Form({ isLoading, setIsLoading }) {
 
     isLogin ? login(email, password) : singUp(email, password, confirmPassword);
 
-    setEmail("");
-    setPassword("");
-    setConfirmPassword("");
-    setIsLoading(false);
+    if (isAuthentificated) {
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
+      setIsLoading(false);
+    }
   }
-
-  // const handleSubmit = async (e) => {
-
-  //   setError("");
-  //   e.preventDefault();
-
-  //   setIsLoading(true);
-
-  //   isLogin ? login(email,password) ? singUp(email, password, confirmPassword)
-  //   const url = isLogin
-  //     ? "http://localhost:8000/api/v1/users/login"
-  //     : "http://localhost:8000/api/v1/users/signup";
-
-  //   const body = isLogin
-  //     ? { email, password }
-  //     : { email, password, passwordConfirm: confirmPassword };
-
-  //   try {
-  //     const res = await fetch(url, {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       credentials: "include",
-  //       body: JSON.stringify(body),
-  //     });
-
-  //     const data = await res.json();
-
-  //     if (res.ok) {
-  //       setUser(data.data);
-  //       navigate("/portfolio");
-  //     } else {
-  //       throw new Error(data.message);
-  //     }
-  //   } catch (error) {
-  //     setError(error.message);
-  //   }
-  //   finally {
-  //     setEmail("");
-  //     setPassword("");
-  //     setConfirmPassword("");
-  //     setIsLoading(false);
-  //   }
-  // };
 
   return (
     <>
@@ -116,8 +74,8 @@ function Form({ isLoading, setIsLoading }) {
         )}
 
         {isLogin && error && <ErrorMsg>{error}</ErrorMsg>}
-        <button className={styles.signupForm__button} disabled={isLoading}>
-          {isLoading ? <Loading /> : isLogin ? "Login" : "Sign Up"}
+        <button className={styles.signupForm__button} disabled={isAuthLoading}>
+          {isAuthLoading ? <Loading /> : isLogin ? "Login" : "Sign Up"}
         </button>
         <div
           className={styles.authToggle}

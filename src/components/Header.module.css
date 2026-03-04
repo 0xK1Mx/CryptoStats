@@ -7,6 +7,7 @@
   padding-left: 5rem;
   padding-right: 5rem;
   width: 100%;
+  position: relative; /* ✅ needed for absolute dropdown */
 }
 
 .logo {
@@ -16,6 +17,13 @@
 .auth {
   display: flex;
   gap: 2rem;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .navbar__list {
@@ -81,4 +89,107 @@
 
 .logoutIcon:hover {
   color: #51cf66;
+}
+
+/* ✅ Tablet */
+@media (max-width: 60rem) {
+  .header {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .navbar__list {
+    gap: 2rem;
+  }
+}
+
+/* ✅ Hamburger (hidden on desktop) */
+.menuBtn {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.6rem;
+  border-radius: 8px;
+}
+
+.menuBar {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #212529;
+  margin: 5px 0;
+}
+
+/* ✅ Dropdown auth styles */
+.navbar__authItem {
+  margin-top: 0.6rem;
+  padding-top: 1rem;
+  display: none;
+}
+
+.navbar__authBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #51cf66;
+  color: #212529;
+  height: 3rem;
+  padding: 0 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.navbar__logoutRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: #212529;
+  font-weight: 600;
+}
+
+/* ✅ Mobile dropdown */
+@media (max-width: 44rem) {
+  .menuBtn {
+    display: block;
+  }
+
+  .navbar__authItem {
+    display: flex;
+  }
+  .auth {
+    display: none;
+  }
+
+  .navbar__list {
+    position: absolute;
+    height: 25vh;
+    top: 6rem;
+    left: 0;
+    right: 0;
+    background: white;
+    border-bottom: 1px solid #00000027;
+    padding: 1.2rem 2rem;
+
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: flex-start;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+
+    transform: translateY(-120%);
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.2s ease;
+    z-index: 999;
+  }
+
+  .open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
 }
