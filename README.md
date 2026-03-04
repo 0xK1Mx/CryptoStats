@@ -92,6 +92,12 @@ More features will be added as development continues.
 ## Project Structure
 
 ```
+/
+├── backend/           # Express API, models, routes, utils
+└── src/               # React application
+    ├── api/
+    ├── components/
+    └── …
 src/
 ├── api/
 │   └── client.js           # Centralized API calls
