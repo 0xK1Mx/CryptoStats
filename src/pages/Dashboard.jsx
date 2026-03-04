@@ -1,6 +1,6 @@
 import React from "react";
 
-import UserDashboard from "../components/userDashboard";
+import UserDashboard from "../components/UserDashboard.jsx";
 
 function Dashboard() {
   return (
