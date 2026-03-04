@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 
 import "./style.css";
 import Signup from "./pages/Signup";
-import Homepage from "./Pages/Homepage";
+import Homepage from "./pages/Homepage";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Header from "./components/Header";
